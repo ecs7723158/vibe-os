@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vibe OS - Visualized Agile/Waterfall Development Hub</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['Fira Code', 'monospace'],
+          },
+          colors: {
+            vibe: {
+              bg: '#090d16',
+              panel: '#0f172a',
+              terminal: '#040711',
+              neonCyan: '#06b6d4',
+              neonGreen: '#10b981',
+              neonAmber: '#f59e0b',
+              neonRed: '#ef4444',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar for Terminal */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #040711;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #06b6d4;
+    }
+
+    .pulse-glow {
+      box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+    }
+    .pulse-glow-amber {
+      box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
+    }
+    .pulse-glow-green {
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .cursor-blink {
+      animation: blink 1s infinite;
+    }
+  </style>
+</head>
+<body class="bg-vibe-bg text-slate-100 font-sans min-h-screen flex flex-col antialiased selection:bg-cyan-500 selection:text-slate-900">
+
+  <!-- Top Navigation Header -->
+  <header class="border-b border-slate-800 bg-slate-900/60 backdrop-blur-md sticky top-0 z-50 px-6 py-3.5 flex items-center justify-between">
+    <div class="flex items-center space-x-3">
+      <div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-cyan-500/20">
+        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+        </svg>
+      </div>
+      <div>
+        <h1 class="font-bold text-lg tracking-wide text-white flex items-center gap-2">
+          VIBE-OS <span class="text-xs px-2 py-0.5 rounded bg-cyan-950 text-cyan-400 border border-cyan-800/60 font-mono">HYBRID DEV CONTROL</span>
+        </h1>
+        <p class="text-xs text-slate-400">Visualized Agile Velocity & Waterfall Governance Platform</p>
+      </div>
+    </div>
+
+    <!-- Right Header Connection Badges -->
+    <div class="flex items-center space-x-4">
+      <div class="flex items-center space-x-2 bg-slate-950/80 px-3 py-1.5 rounded-full border border-slate-800 text-xs">
+        <span id="ws-indicator" class="w-2.5 h-2.5 rounded-full bg-slate-500 animate-pulse"></span>
+        <span id="ws-status-text" class="text-slate-400 font-mono">WS: Connecting...</span>
+      </div>
+
+      <div class="flex items-center space-x-2 bg-slate-950/80 px-3 py-1.5 rounded-full border border-slate-800 text-xs">
+        <span id="agent-indicator" class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+        <span class="text-slate-300 font-mono">PyAgent: :8000</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Grid Layout (3 Columns) -->
+  <main class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-5 p-5 max-w-[1920px] w-full mx-auto">
+    
+    <!-- LEFT PANEL: State Board (Cols 1-3) -->
+    <section class="lg:col-span-3 flex flex-col space-y-5">
+      
+      <!-- System Phase & Waterfall Lamp -->
+      <div class="bg-vibe-panel border border-slate-800 rounded-xl p-5 shadow-xl">
+        <h2 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-4 flex items-center justify-between">
+          <span>System State Board</span>
+          <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+          </svg>
+        </h2>
+
+        <!-- Active Phase Card -->
+        <div class="bg-slate-950/70 border border-slate-800 rounded-lg p-4 mb-4">
+          <div class="text-xs text-slate-400 mb-1">CURRENT PHASE</div>
+          <div id="phase-badge" class="inline-flex items-center px-3 py-1 rounded-md text-sm font-semibold font-mono bg-blue-950 text-blue-400 border border-blue-800">
+            INIT
+          </div>
+        </div>
+
+        <!-- Waterfall Approval Gate Lamp -->
+        <div class="bg-slate-950/70 border border-slate-800 rounded-lg p-4">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs text-slate-400 font-medium">WATERFALL GATE</span>
+            <span id="gate-lamp-status" class="text-xs font-mono font-semibold text-slate-400">LOCKED</span>
+          </div>
+          
+          <div class="flex items-center space-x-3">
+            <div id="gate-lamp-dot" class="w-4 h-4 rounded-full bg-slate-600 transition-all duration-300"></div>
+            <div id="gate-lamp-desc" class="text-xs text-slate-400">Awaiting task initiation</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Agile Backlog Quick View -->
+      <div class="bg-vibe-panel border border-slate-800 rounded-xl p-5 shadow-xl flex-1 flex flex-col">
+        <h2 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3 flex items-center justify-between">
+          <span>Agile Sprint Backlog</span>
+          <span class="text-[10px] px-2 py-0.5 bg-slate-800 text-slate-300 rounded font-mono">Sprint 1</span>
+        </h2>
+
+        <div class="space-y-2.5 flex-1 overflow-y-auto max-h-[360px] pr-1">
+          <div class="bg-slate-950/60 border border-slate-800/80 rounded-lg p-3 text-xs">
+            <div class="flex justify-between items-center mb-1">
+              <span class="font-mono text-cyan-400 font-medium">TASK-001</span>
+              <span class="px-1.5 py-0.5 rounded bg-emerald-950 text-emerald-400 text-[10px] font-mono border border-emerald-800">DONE</span>
+            </div>
+            <p class="text-slate-300">Initialize Go WebSocket Gateway & broadcasting routing</p>
+          </div>
+
+          <div class="bg-slate-950/60 border border-slate-800/80 rounded-lg p-3 text-xs">
+            <div class="flex justify-between items-center mb-1">
+              <span class="font-mono text-cyan-400 font-medium">TASK-002</span>
+              <span id="task2-status" class="px-1.5 py-0.5 rounded bg-amber-950 text-amber-400 text-[10px] font-mono border border-amber-800 animate-pulse">IN_PROGRESS</span>
+            </div>
+            <p class="text-slate-300">Build FastAPI mock agent execution loop & status hook</p>
+          </div>
+
+          <div class="bg-slate-950/60 border border-slate-800/80 rounded-lg p-3 text-xs">
+            <div class="flex justify-between items-center mb-1">
+              <span class="font-mono text-cyan-400 font-medium">TASK-003</span>
+              <span class="px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 text-[10px] font-mono">READY</span>
+            </div>
+            <p class="text-slate-300">Construct Cyberpunk Dark Mode Frontend Control Panel</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CENTER PANEL: Vibe Terminal (Cols 4-8) -->
+    <section class="lg:col-span-6 flex flex-col">
+      <div class="bg-vibe-panel border border-slate-800 rounded-xl shadow-2xl flex-1 flex flex-col overflow-hidden">
+        
+        <!-- Terminal Window Header -->
+        <div class="bg-slate-950 px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <div class="flex space-x-1.5">
+              <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-green-500/80 inline-block"></span>
+            </div>
+            <span class="text-xs font-mono text-slate-400 ml-2 flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+              VIBE_LOG_STREAM // ws://localhost:8080/ws/client
+            </span>
+          </div>
+
+          <div class="flex items-center space-x-2">
+            <button id="btn-clear-terminal" class="text-[11px] font-mono text-slate-400 hover:text-white px-2 py-1 rounded bg-slate-900 border border-slate-800 hover:border-slate-700 transition">
+              CLEAR
+            </button>
+          </div>
+        </div>
+
+        <!-- Terminal Output Viewport -->
+        <div id="terminal-viewport" class="bg-vibe-terminal p-4 flex-1 font-mono text-xs overflow-y-auto space-y-2 min-h-[480px] max-h-[620px]">
+          <!-- Welcome Log Entry -->
+          <div class="text-slate-500 border-l-2 border-slate-700 pl-2 py-1">
+            <span class="text-slate-600">[SYSTEM INIT]</span> Connection initialized. Awaiting broadcast stream...
+          </div>
+        </div>
+
+        <!-- Terminal Footer Status Bar -->
+        <div class="bg-slate-950/90 border-t border-slate-800 px-4 py-2 flex items-center justify-between text-[11px] font-mono text-slate-400">
+          <div class="flex items-center space-x-2">
+            <span class="inline-block w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+            <span>STREAMING REAL-TIME AGENT HOOKS</span>
+          </div>
+          <div id="log-count" class="text-slate-500">Logs: 1</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT PANEL: Control Panel (Cols 9-12) -->
+    <section class="lg:col-span-3 flex flex-col space-y-5">
+      
+      <!-- Control Panel Form -->
+      <div class="bg-vibe-panel border border-slate-800 rounded-xl p-5 shadow-xl">
+        <h2 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-4 flex items-center justify-between">
+          <span>Agent Control Operations</span>
+          <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
+          </svg>
+        </h2>
+
+        <!-- Task ID Input -->
+        <div class="mb-4">
+          <label class="block text-xs font-medium text-slate-300 mb-1">TASK ID</label>
+          <input type="text" id="input-task-id" value="TASK-004" 
+                 class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs font-mono text-cyan-400 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500">
+        </div>
+
+        <!-- Task Description Input -->
+        <div class="mb-5">
+          <label class="block text-xs font-medium text-slate-300 mb-1">TASK DESCRIPTION</label>
+          <textarea id="input-task-desc" rows="3" 
+                    class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500">Refactor WebSocket state broadcasting & execute waterfall approval gate</textarea>
+        </div>
+
+        <!-- Action Button 1: Start Agent -->
+        <button id="btn-start-agent" class="w-full mb-3 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-semibold py-2.5 px-4 rounded-lg text-xs shadow-lg shadow-cyan-900/30 flex items-center justify-center space-x-2 transition transform active:scale-95">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <span>START AGENT (POST :8000)</span>
+        </button>
+
+        <!-- Action Button 2: Approve Waterfall Gate -->
+        <button id="btn-approve-gate" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-semibold py-2.5 px-4 rounded-lg text-xs shadow-lg shadow-emerald-900/30 flex items-center justify-center space-x-2 transition transform active:scale-95">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <span>APPROVE WATERFALL GATE</span>
+        </button>
+      </div>
+
+      <!-- Live Toast Feedback Card -->
+      <div class="bg-vibe-panel border border-slate-800 rounded-xl p-5 shadow-xl flex-1 flex flex-col justify-between">
+        <div>
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Operation Feedback</h3>
+          <div id="toast-message" class="text-xs font-mono text-slate-400 bg-slate-950 p-3 rounded-lg border border-slate-800/80 min-h-[70px]">
+            System ready. Click "Start Agent" to launch execution loop.
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-slate-800/80 text-[11px] text-slate-500 font-mono">
+          Markdown State Synced: <br>
+          <span class="text-cyan-400">control-state/HANDOFF.md</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Vanilla JavaScript Logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const wsIndicator = document.getElementById('ws-indicator');
+      const wsStatusText = document.getElementById('ws-status-text');
+      const terminalViewport = document.getElementById('terminal-viewport');
+      const logCountElem = document.getElementById('log-count');
+      const btnClearTerminal = document.getElementById('btn-clear-terminal');
+      
+      const phaseBadge = document.getElementById('phase-badge');
+      const gateLampStatus = document.getElementById('gate-lamp-status');
+      const gateLampDot = document.getElementById('gate-lamp-dot');
+      const gateLampDesc = document.getElementById('gate-lamp-desc');
+      
+      const inputTaskId = document.getElementById('input-task-id');
+      const inputTaskDesc = document.getElementById('input-task-desc');
+      const btnStartAgent = document.getElementById('btn-start-agent');
+      const btnApproveGate = document.getElementById('btn-approve-gate');
+      const toastMessage = document.getElementById('toast-message');
+
+      let logCounter = 1;
+      let socket = null;
+
+      // Connect to Go WebSocket Gateway
+      function connectWebSocket() {
+        const wsUrl = 'ws://localhost:8080/ws/client';
+        socket = new WebSocket(wsUrl);
+
+        socket.onopen = () => {
+          wsIndicator.className = 'w-2.5 h-2.5 rounded-full bg-emerald-400 pulse-glow-green';
+          wsStatusText.textContent = 'WS: Connected';
+          wsStatusText.className = 'text-emerald-400 font-mono font-medium';
+          appendLog('SystemGateway', 'CONNECTED', 'Successfully established WebSocket bridge to backend-go (:8080)');
+        };
+
+        socket.onmessage = (event) => {
+          try {
+            const data = JSON.parse(event.data);
+            appendLog(data.agent_name || 'Agent', data.status || 'INFO', data.log_message || event.data, data.timestamp);
+            updateStateBoard(data.status, data.log_message);
+          } catch (e) {
+            appendLog('RawStream', 'INFO', event.data);
+          }
+        };
+
+        socket.onclose = () => {
+          wsIndicator.className = 'w-2.5 h-2.5 rounded-full bg-rose-500';
+          wsStatusText.textContent = 'WS: Disconnected';
+          wsStatusText.className = 'text-rose-400 font-mono';
+          appendLog('SystemGateway', 'DISCONNECTED', 'Connection lost. Reconnecting in 3s...');
+          setTimeout(connectWebSocket, 3000);
+        };
+
+        socket.onerror = (err) => {
+          console.error('WebSocket Error:', err);
+        };
+      }
+
+      // Append log entry to terminal
+      function appendLog(agentName, status, message, timestamp) {
+        logCounter++;
+        logCountElem.textContent = `Logs: ${logCounter}`;
+
+        const timeStr = timestamp ? new Date(timestamp).toLocaleTimeString() : new Date().toLocaleTimeString();
+
+        let badgeStyle = 'bg-slate-800 text-slate-300 border-slate-700';
+        if (status === 'STARTED' || status === 'IN_PROGRESS') badgeStyle = 'bg-cyan-950 text-cyan-400 border-cyan-800';
+        if (status === 'WRITING_CODE' || status === 'ANALYZING') badgeStyle = 'bg-indigo-950 text-indigo-400 border-indigo-800';
+        if (status === 'RUNNING_TESTS' || status === 'VERIFYING') badgeStyle = 'bg-amber-950 text-amber-400 border-amber-800';
+        if (status === 'WAITING_HUMAN_APPROVAL') badgeStyle = 'bg-rose-950 text-rose-400 border-rose-800 font-bold animate-pulse';
+        if (status === 'APPROVED') badgeStyle = 'bg-emerald-950 text-emerald-400 border-emerald-800 font-bold';
+
+        const logNode = document.createElement('div');
+        logNode.className = 'border-l-2 border-slate-800 pl-3 py-1 font-mono text-xs text-slate-200 transition-all hover:bg-slate-900/40 rounded-r';
+        logNode.innerHTML = `
+          <div class="flex items-center space-x-2 mb-0.5">
+            <span class="text-[10px] text-slate-500">${timeStr}</span>
+            <span class="text-cyan-400 font-semibold">[${agentName}]</span>
+            <span class="px-1.5 py-0.2 rounded text-[10px] border ${badgeStyle}">${status}</span>
+          </div>
+          <div class="text-slate-300 leading-relaxed pl-1 font-sans text-xs">${escapeHtml(message)}</div>
+        `;
+
+        terminalViewport.appendChild(logNode);
+        terminalViewport.scrollTop = terminalViewport.scrollHeight;
+      }
+
+      // Update State Board lamps according to status
+      function updateStateBoard(status, message) {
+        if (status === 'STARTED' || status === 'ANALYZING' || status === 'WRITING_CODE' || status === 'RUNNING_TESTS') {
+          phaseBadge.textContent = 'AGILE_RUNNING';
+          phaseBadge.className = 'inline-flex items-center px-3 py-1 rounded-md text-sm font-semibold font-mono bg-cyan-950 text-cyan-400 border border-cyan-800 pulse-glow';
+          
+          gateLampStatus.textContent = 'RUNNING';
+          gateLampDot.className = 'w-4 h-4 rounded-full bg-cyan-500 animate-pulse';
+          gateLampDesc.textContent = 'Agent executing code synthesis...';
+        } 
+        else if (status === 'WAITING_HUMAN_APPROVAL') {
+          phaseBadge.textContent = 'WAITING_APPROVAL';
+          phaseBadge.className = 'inline-flex items-center px-3 py-1 rounded-md text-sm font-semibold font-mono bg-amber-950 text-amber-400 border border-amber-800 pulse-glow-amber';
+
+          gateLampStatus.textContent = 'GATE_LOCKED';
+          gateLampStatus.className = 'text-xs font-mono font-semibold text-amber-400';
+          gateLampDot.className = 'w-4 h-4 rounded-full bg-amber-500 pulse-glow-amber animate-bounce';
+          gateLampDesc.textContent = 'Waterfall Approval Required!';
+        } 
+        else if (status === 'APPROVED') {
+          phaseBadge.textContent = 'APPROVED';
+          phaseBadge.className = 'inline-flex items-center px-3 py-1 rounded-md text-sm font-semibold font-mono bg-emerald-950 text-emerald-400 border border-emerald-800 pulse-glow-green';
+
+          gateLampStatus.textContent = 'PASSED';
+          gateLampStatus.className = 'text-xs font-mono font-semibold text-emerald-400';
+          gateLampDot.className = 'w-4 h-4 rounded-full bg-emerald-500 pulse-glow-green';
+          gateLampDesc.textContent = 'Gate signed off. Code authorized.';
+        }
+      }
+
+      // Start Agent POST request
+      btnStartAgent.addEventListener('click', async () => {
+        const taskId = inputTaskId.value.trim() || 'TASK-004';
+        const description = inputTaskDesc.value.trim() || 'Executing Vibe Coding task';
+
+        toastMessage.textContent = 'Sending task request to Python Agent (:8000)...';
+        toastMessage.className = 'text-xs font-mono text-cyan-400 bg-slate-950 p-3 rounded-lg border border-cyan-800/60';
+
+        try {
+          const res = await fetch('http://localhost:8000/v1/task/start', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              task_id: taskId,
+              description: description,
+              agent_name: 'VibeAgent-01'
+            })
+          });
+
+          const resData = await res.json();
+          if (res.ok) {
+            toastMessage.textContent = `[SUCCESS] ${resData.message}`;
+            toastMessage.className = 'text-xs font-mono text-emerald-400 bg-slate-950 p-3 rounded-lg border border-emerald-800/60';
+          } else {
+            toastMessage.textContent = `[ERROR] ${resData.detail || 'Failed to trigger agent'}`;
+            toastMessage.className = 'text-xs font-mono text-rose-400 bg-slate-950 p-3 rounded-lg border border-rose-800/60';
+          }
+        } catch (err) {
+          toastMessage.textContent = `[FETCH ERROR] Could not connect to http://localhost:8000. Is agent-python running?`;
+          toastMessage.className = 'text-xs font-mono text-rose-400 bg-slate-950 p-3 rounded-lg border border-rose-800/60';
+        }
+      });
+
+      // Approve Gate POST request
+      btnApproveGate.addEventListener('click', async () => {
+        toastMessage.textContent = 'Submitting Waterfall Gate sign-off to Python Agent...';
+        toastMessage.className = 'text-xs font-mono text-amber-400 bg-slate-950 p-3 rounded-lg border border-amber-800/60';
+
+        try {
+          const res = await fetch('http://localhost:8000/v1/task/approve', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              reviewer: 'Human Architect Lead',
+              decision: 'APPROVED',
+              notes: 'Waterfall approval gate signed off via Frontend Control Panel.'
+            })
+          });
+
+          const resData = await res.json();
+          if (res.ok) {
+            toastMessage.textContent = `[GATE APPROVED] ${resData.message}`;
+            toastMessage.className = 'text-xs font-mono text-emerald-400 bg-slate-950 p-3 rounded-lg border border-emerald-800/60';
+          } else {
+            toastMessage.textContent = `[ERROR] ${resData.detail || 'Failed to sign off gate'}`;
+            toastMessage.className = 'text-xs font-mono text-rose-400 bg-slate-950 p-3 rounded-lg border border-rose-800/60';
+          }
+        } catch (err) {
+          toastMessage.textContent = `[FETCH ERROR] Could not connect to http://localhost:8000`;
+          toastMessage.className = 'text-xs font-mono text-rose-400 bg-slate-950 p-3 rounded-lg border border-rose-800/60';
+        }
+      });
+
+      // Clear terminal button
+      btnClearTerminal.addEventListener('click', () => {
+        terminalViewport.innerHTML = '<div class="text-slate-500 border-l-2 border-slate-700 pl-2 py-1"><span class="text-slate-600">[CLEARED]</span> Terminal log output cleared.</div>';
+        logCounter = 0;
+        logCountElem.textContent = 'Logs: 0';
+      });
+
+      function escapeHtml(str) {
+        return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+      }
+
+      // Initialize WebSocket connection
+      connectWebSocket();
+    });
+  </script>
+</body>
+</html>

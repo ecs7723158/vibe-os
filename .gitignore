@@ -1,0 +1,22 @@
+# Mac system files
+.DS_Store
+
+# Python virtual environment & cache
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Go binaries and cache
+backend-go/gateway
+*.exe
+*.exe shadow
+*.out
+
+# Logs & temp files
+*.log
+scratch/
+.idea/
+.vscode/
