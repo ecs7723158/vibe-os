@@ -101,7 +101,7 @@
 
       <div class="flex items-center space-x-2 bg-slate-950/80 px-3 py-1.5 rounded-full border border-slate-800 text-xs">
         <span id="agent-indicator" class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-        <span class="text-slate-300 font-mono">PyAgent: :8000</span>
+        <span class="text-slate-300 font-mono">PyAgent: :8005</span>
       </div>
     </div>
   </header>
@@ -412,7 +412,7 @@
         toastMessage.className = 'text-xs font-mono text-cyan-400 bg-slate-950 p-3 rounded-lg border border-cyan-800/60';
 
         try {
-          const res = await fetch('http://localhost:8000/v1/task/start', {
+          const res = await fetch('http://localhost:8005/v1/task/start', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -442,7 +442,7 @@
         toastMessage.className = 'text-xs font-mono text-amber-400 bg-slate-950 p-3 rounded-lg border border-amber-800/60';
 
         try {
-          const res = await fetch('http://localhost:8000/v1/task/approve', {
+          const res = await fetch('http://localhost:8005/v1/task/approve', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
