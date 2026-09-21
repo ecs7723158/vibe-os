@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  backend-go:
+    build: ./backend-go
+    ports:
+      - "8080:8080"
+    restart: always
+
+  agent-python:
+    build: ./agent-python
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./control-state:/app/control-state
+    depends_on:
+      - backend-go
+    restart: always
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend-go
+      - agent-python
+    restart: always
