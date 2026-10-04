@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>knowledge-graph — 完整调用流程与架构文档</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+:root {
+  --bg: #0f172a; --surface: #1e293b; --border: #334155;
+  --text: #e2e8f0; --muted: #94a3b8; --accent: #38bdf8;
+  --warn: #fbbf24; --err: #f87171; --ok: #34d399;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+.container { max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
+h1 { font-size: 2.4rem; margin-bottom: 8px; background: linear-gradient(135deg, var(--accent), #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+h2 { font-size: 1.7rem; margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); }
+h3 { font-size: 1.25rem; margin: 32px 0 12px; color: var(--accent); }
+h4 { font-size: 1.05rem; margin: 20px 0 8px; color: var(--warn); }
+p { margin: 8px 0; color: var(--muted); }
+.subtitle { color: var(--muted); font-size: 1.1rem; margin-bottom: 32px; }
+.mermaid { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin: 20px 0; overflow-x: auto; position: relative; }
+.mermaid.is-enhanced { padding: 0; overflow: hidden; min-height: 260px; }
+.mermaid-viewport { padding: 54px 24px 24px; overflow: hidden; cursor: grab; touch-action: none; min-height: 260px; }
+.mermaid-viewport.is-dragging { cursor: grabbing; }
+.mermaid-viewport svg { max-width: none !important; height: auto; transform-origin: 0 0; transition: transform 120ms ease; }
+.mermaid-toolbar { position: absolute; top: 10px; right: 10px; z-index: 3; display: flex; align-items: center; gap: 6px; padding: 6px; background: rgba(15,23,42,0.92); border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.28); }
+.mermaid-toolbar button, .mermaid-toolbar .zoom-level { height: 28px; min-width: 32px; border: 1px solid var(--border); border-radius: 6px; background: #1e293b; color: var(--text); font: 600 0.78rem system-ui, sans-serif; display: inline-flex; align-items: center; justify-content: center; }
+.mermaid-toolbar button { cursor: pointer; }
+.mermaid-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+.mermaid-toolbar .zoom-level { min-width: 52px; color: var(--muted); background: transparent; }
+.call-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.92rem; }
+.call-table th { background: #1a2744; color: var(--accent); text-align: left; padding: 10px 14px; border: 1px solid var(--border); }
+.call-table td { padding: 8px 14px; border: 1px solid var(--border); vertical-align: top; }
+.call-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; }
+.tag-async { background: #7c3aed33; color: #a78bfa; }
+.tag-class { background: #05966933; color: var(--ok); }
+.tag-func { background: #2563eb33; color: var(--accent); }
+.tag-cmd { background: #d9770633; color: var(--warn); }
+.tag-endpoint { background: #dc262633; color: var(--err); }
+.tag-hook { background: #db277733; color: #f472b6; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin: 16px 0; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; margin: 16px 0; }
+.arrow-chain { font-family: 'Fira Code', monospace; font-size: 0.85rem; color: var(--accent); padding: 10px; background: rgba(56,189,248,0.06); border-radius: 6px; }
+code { font-family: 'Fira Code', 'Cascadia Code', monospace; background: rgba(255,255,255,0.06); padding: 1px 6px; border-radius: 3px; font-size: 0.88em; }
+ul, ol { margin: 8px 0 8px 24px; color: var(--muted); }
+li { margin: 4px 0; }
+a { color: var(--accent); }
+hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+.nav { position: sticky; top: 0; background: var(--bg); z-index: 10; padding: 12px 0; border-bottom: 1px solid var(--border); display: flex; gap: 20px; flex-wrap: wrap; font-size: 0.9rem; }
+.nav a { text-decoration: none; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) { .container { padding: 16px; } h1 { font-size: 1.8rem; } }
+
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>knowledge-graph — 完整调用流程与架构文档</h1>
+<p class="subtitle">由 graphify 知识图谱生成：188 个节点、285 条边、1 个社区。Commit: unknown</p>
+
+<div class="nav">
+    <a href="#overview">架构总览</a>
+    <a href="#extract-pipeline">提取管线</a>
+</div>
+
+<!-- ====== Architecture Overview ====== -->
+<h2 id="overview">1. 架构总览</h2>
+
+<div class="mermaid">
+
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    EXTRACT_PIPELINE_5F350230("提取管线<br/><small>188 nodes</small>")
+    class EXTRACT_PIPELINE_5F350230 module;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h4>架构层次</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>层</th><th>节点</th><th>社区</th></tr>
+      <tr><td>提取管线</td><td>188</td><td><code>unknown</code></td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>核心数据流</h4>
+    <div class="arrow-chain">提取管线</div>
+  </div>
+</div>
+<hr>
+<!-- ====== 2. 提取管线 ====== -->
+<h2 id="extract-pipeline">2. 提取管线</h2>
+<p>提取管线 汇集了与 graph、graphify、agent、test 相关的实现，主要分布在 未标注源文件。本节覆盖 188 个节点、285 条内部边，图中只展示最有代表性的调用关系以保持可读性。</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: 提取管线 (188 nodes, 285 edges)
+    scripts_graphify_engine_4827480a("graphify_engine.py")
+    agent_python_main_94afa706("main.py")
+    backend_go_main_e33846d0("main.go")
+    scripts_graphify_engine_upgradedvibegraphifyengi_aec84a23("UpgradedVibeGraphifyEngine")
+    tests_test_graphify_integration_testgraphifyinte_2b43d539("TestGraphifyIntegration")
+    tests_test_graphify_integration_7933fa65("test_graphify_integration.py")
+    agent_python_graph_service_query_code_graph_4eb860ed("query_code_graph()")
+    agent_python_graph_service_ensure_graph_exists_e7841da0("ensure_graph_exists()")
+    agent_python_graph_service_find_matching_nodes_701d56e3("find_matching_nodes()")
+    agent_python_main_broadcast_agent_trace_7425ef8f("broadcast_agent_trace()")
+    agent_python_main_broadcast_agent_status_a0c56eea("broadcast_agent_status()")
+    agent_python_main_mock_agent_execution_loop_17a3f6c3("mock_agent_execution_loop()")
+    agent_python_main_update_file_content_c4ba4598("update_file_content()")
+    agent_python_main_start_task_a02ceb76("start_task()")
+    agent_python_main_approve_waterfall_gate_84ae2209("approve_waterfall_gate()")
+    agent_python_main_graph_query_84df656f("graph_query()")
+    agent_python_main_forward_agent_trace_40941284("forward_agent_trace()")
+    agent_python_main_call_mcp_tool_2f236780("call_mcp_tool()")
+    agent_python_graph_service_query_code_graph_4eb860ed -->|调用| agent_python_graph_service_ensure_graph_exists_e7841da0
+    agent_python_graph_service_query_code_graph_4eb860ed -->|调用| agent_python_graph_service_find_matching_nodes_701d56e3
+    agent_python_main_broadcast_agent_trace_7425ef8f -->|调用| agent_python_main_broadcast_agent_status_a0c56eea
+    agent_python_main_mock_agent_execution_loop_17a3f6c3 -->|调用| agent_python_main_broadcast_agent_status_a0c56eea
+    agent_python_main_mock_agent_execution_loop_17a3f6c3 -->|调用| agent_python_main_broadcast_agent_trace_7425ef8f
+    agent_python_main_mock_agent_execution_loop_17a3f6c3 -->|调用| agent_python_main_update_file_content_c4ba4598
+    agent_python_main_mock_agent_execution_loop_17a3f6c3 -->|调用| agent_python_graph_service_query_code_graph_4eb860ed
+    agent_python_main_start_task_a02ceb76 -->|调用| agent_python_main_update_file_content_c4ba4598
+    agent_python_main_approve_waterfall_gate_84ae2209 -->|调用| agent_python_main_broadcast_agent_status_a0c56eea
+    agent_python_main_approve_waterfall_gate_84ae2209 -->|调用| agent_python_main_update_file_content_c4ba4598
+    agent_python_main_graph_query_84df656f -->|调用| agent_python_graph_service_query_code_graph_4eb860ed
+    agent_python_main_forward_agent_trace_40941284 -->|调用| agent_python_main_broadcast_agent_trace_7425ef8f
+    agent_python_main_call_mcp_tool_2f236780 -->|调用| agent_python_graph_service_query_code_graph_4eb860ed
+    agent_python_main_94afa706 -->|导入| agent_python_graph_service_query_code_graph_4eb860ed
+    %% Omitted for readability: 170 nodes, 0 edges
+    class scripts_graphify_engine_4827480a module;
+    class agent_python_main_94afa706 module;
+    class backend_go_main_e33846d0 module;
+    class scripts_graphify_engine_upgradedvibegraphifyengi_aec84a23 klass;
+    class tests_test_graphify_integration_testgraphifyinte_2b43d539 klass;
+    class tests_test_graphify_integration_7933fa65 test;
+    class agent_python_graph_service_query_code_graph_4eb860ed function;
+    class agent_python_graph_service_ensure_graph_exists_e7841da0 function;
+    class agent_python_graph_service_find_matching_nodes_701d56e3 function;
+    class agent_python_main_broadcast_agent_trace_7425ef8f function;
+    class agent_python_main_broadcast_agent_status_a0c56eea function;
+    class agent_python_main_mock_agent_execution_loop_17a3f6c3 function;
+    class agent_python_main_update_file_content_c4ba4598 function;
+    class agent_python_main_start_task_a02ceb76 function;
+    class agent_python_main_approve_waterfall_gate_84ae2209 function;
+    class agent_python_main_graph_query_84df656f function;
+    class agent_python_main_forward_agent_trace_40941284 function;
+    class agent_python_main_call_mcp_tool_2f236780 function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>调用明细</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">节点</th>
+  <th style="width:10%">类型</th>
+  <th style="width:17%">调用方</th>
+  <th style="width:20%">被调用/依赖</th>
+  <th style="width:20%">说明</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>README_SETUP.md</code><br><small style="color:var(--muted)"></small></td>
+  <td><span class="tag tag-class">类</span></td>
+  <td>外部入口 / 无直接入边</td>
+  <td>无直接出边</td>
+  <td>项目 中的 README_SETUP.md 节点。</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><code>Vibe OS: Visualized Agile/Waterfall Hybrid Development System</code><br><small style="color:var(--muted)"></small></td>
+  <td><span class="tag tag-class">类</span></td>
+  <td>外部入口 / 无直接入边</td>
+  <td>无直接出边</td>
+  <td>项目 中的 Vibe OS: Visualized Agile/Waterfall Hybrid Development System 节点。</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td><code>Directory Overview</code><br><small style="color:var(--muted)"></small></td>
+  <td><span class="tag tag-class">类</span></td>
+  <td>外部入口 / 无直接入边</td>
+  <td>无直接出边</td>
+  <td>项目 中的 Directory Overview 节点。</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td><code>Quick Start Guide</code><br><small style="color:var(--muted)"></small></td>
+  <td><span class="tag tag-class">类</span></td>
+  <td>外部入口 / 无直接入边</td>
+  <td>无直接出边</td>
+  <td>项目 中的 Quick Start Guide 节点。</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td><code>Step 1: Start the Go WebSocket Gateway (`backend-go`)</code><br><small style="color:var(--muted)"></small></td>
+  <td><span class="tag tag-class">类</span></td>
+  <td>外部入口 / 无直接入边</td>
+  <td>无直接出边</td>
+  <td>项目 中的 Step 1: Start the Go WebSocket Gateway (`backend-go`) 节点。</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td><code>Step 2: Start the Python Agent Backend (`agent-python`)</code><br><small style="color:var(--muted)"></small></td>
+  <td><span class="tag tag-class">类</span></td>
+  <td>外部入口 / 无直接入边</td>
+  <td>无直接出边</td>
+  <td>项目 中的 Step 2: Start the Python Agent Backend (`agent-python`) 节点。</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td><code>Step 3: Launch the Frontend Control Dashboard (`frontend`)</code><br><small style="color:var(--muted)"></small></td>
+  <td><span class="tag tag-class">类</span></td>
+  <td>外部入口 / 无直接入边</td>
+  <td>无直接出边</td>
+  <td>项目 中的 Step 3: Launch the Frontend Control Dashboard (`frontend`) 节点。</td>
+</tr>
+<tr>
+  <td>8</td>
+  <td><code>Interactive Workflow Verification</code><br><small style="color:var(--muted)"></small></td>
+  <td><span class="tag tag-class">类</span></td>
+  <td>外部入口 / 无直接入边</td>
+  <td>无直接出边</td>
+  <td>项目 中的 Interactive Workflow Verification 节点。</td>
+</tr>
+<tr>
+  <td>9</td>
+  <td><code>Security &amp; Environment Integrity</code><br><small style="color:var(--muted)"></small></td>
+  <td><span class="tag tag-class">类</span></td>
+  <td>外部入口 / 无直接入边</td>
+  <td>无直接出边</td>
+  <td>项目 中的 Security &amp; Environment Integrity 节点。</td>
+</tr>
+<tr>
+  <td>10</td>
+  <td><code>graph_service.py</code><br><small style="color:var(--muted)"></small></td>
+  <td><span class="tag tag-class">模块</span></td>
+  <td><code>main.py</code></td>
+  <td><code>json</code><br><code>os</code><br><code>pathlib</code><br>+2 个更多</td>
+  <td>项目 中的模块文件，承载该层主要实现。</td>
+</tr>
+<tr>
+  <td>11</td>
+  <td><code>ensure_graph_exists()</code><br><small style="color:var(--muted)"></small></td>
+  <td><span class="tag tag-func">函数</span></td>
+  <td><code>query_code_graph()</code><br><code>setUpClass()</code></td>
+  <td>无直接出边</td>
+  <td>构建依赖关系并提供排序或图形化数据。</td>
+</tr>
+<tr>
+  <td>12</td>
+  <td><code>Any</code><br><small style="color:var(--muted)"></small></td>
+  <td><span class="tag tag-class">类</span></td>
+  <td>外部入口 / 无直接入边</td>
+  <td>无直接出边</td>
+  <td>项目 中的 Any 节点。</td>
+</tr>
+<tr>
+  <td>13</td>
+  <td><code>find_matching_nodes()</code><br><small style="color:var(--muted)"></small></td>
+  <td><span class="tag tag-func">函数</span></td>
+  <td><code>query_code_graph()</code></td>
+  <td>无直接出边</td>
+  <td>项目 中的 find_matching_nodes() 节点。</td>
+</tr>
+<tr>
+  <td>14</td>
+  <td><code>query_code_graph()</code><br><small style="color:var(--muted)"></small></td>
+  <td><span class="tag tag-func">函数</span></td>
+  <td><code>call_mcp_tool()</code><br><code>graph_query()</code><br><code>main.py</code><br>+5 个更多</td>
+  <td><code>ensure_graph_exists()</code><br><code>find_matching_nodes()</code></td>
+  <td>构建依赖关系并提供排序或图形化数据。</td>
+</tr>
+<tr>
+  <td>15</td>
+  <td><code>Graph Service for Vibe OS Agent =============================== Provides local…</code><br><small style="color:var(--muted)"></small></td>
+  <td><span class="tag tag-class">类</span></td>
+  <td>外部入口 / 无直接入边</td>
+  <td>无直接出边</td>
+  <td>构建依赖关系并提供排序或图形化数据。</td>
+</tr>
+<tr>
+  <td>16</td>
+  <td><code>Loads knowledge_graph.json, generating it via graphify_engine.py if missing.</code><br><small style="color:var(--muted)"></small></td>
+  <td><span class="tag tag-class">类</span></td>
+  <td>外部入口 / 无直接入边</td>
+  <td>无直接出边</td>
+  <td>构建依赖关系并提供排序或图形化数据。</td>
+</tr>
+<tr>
+  <td>17</td>
+  <td><code>Fuzzy searches nodes by id or label.</code><br><small style="color:var(--muted)"></small></td>
+  <td><span class="tag tag-class">类</span></td>
+  <td>外部入口 / 无直接入边</td>
+  <td>无直接出边</td>
+  <td>项目 中的 Fuzzy searches nodes by id or label. 节点。</td>
+</tr>
+<tr>
+  <td>18</td>
+  <td><code>Queries Graphify knowledge graph to inspect code dependencies, architecture…</code><br><small style="color:var(--muted)"></small></td>
+  <td><span class="tag tag-class">类</span></td>
+  <td>外部入口 / 无直接入边</td>
+  <td>无直接出边</td>
+  <td>构建依赖关系并提供排序或图形化数据。</td>
+</tr>
+<tr>
+  <td>19</td>
+  <td><code>main.py</code><br><small style="color:var(--muted)"></small></td>
+  <td><span class="tag tag-class">模块</span></td>
+  <td>外部入口 / 无直接入边</td>
+  <td><code>asyncio</code><br><code>datetime</code><br><code>fastapi</code><br>+10 个更多</td>
+  <td>项目 中的模块文件，承载该层主要实现。</td>
+</tr>
+<tr>
+  <td>20</td>
+  <td><code>TaskStartRequest</code><br><small style="color:var(--muted)"></small></td>
+  <td><span class="tag tag-class">类</span></td>
+  <td>外部入口 / 无直接入边</td>
+  <td>无直接出边</td>
+  <td>项目 中的 TaskStartRequest 节点。</td>
+</tr>
+<tr>
+  <td>21</td>
+  <td><code>BaseModel</code><br><small style="color:var(--muted)"></small></td>
+  <td><span class="tag tag-class">类</span></td>
+  <td>外部入口 / 无直接入边</td>
+  <td>无直接出边</td>
+  <td>项目 中的 BaseModel 节点。</td>
+</tr>
+<tr>
+  <td>22</td>
+  <td><code>ApprovalRequest</code><br><small style="color:var(--muted)"></small></td>
+  <td><span class="tag tag-class">类</span></td>
+  <td>外部入口 / 无直接入边</td>
+  <td>无直接出边</td>
+  <td>项目 中的 ApprovalRequest 节点。</td>
+</tr>
+<tr>
+  <td>23</td>
+  <td><code>GraphQueryRequest</code><br><small style="color:var(--muted)"></small></td>
+  <td><span class="tag tag-class">类</span></td>
+  <td>外部入口 / 无直接入边</td>
+  <td>无直接出边</td>
+  <td>构建依赖关系并提供排序或图形化数据。</td>
+</tr>
+<tr>
+  <td>24</td>
+  <td><code>AgentTraceRequest</code><br><small style="color:var(--muted)"></small></td>
+  <td><span class="tag tag-class">类</span></td>
+  <td>外部入口 / 无直接入边</td>
+  <td>无直接出边</td>
+  <td>项目 中的 AgentTraceRequest 节点。</td>
+</tr>
+<tr>
+  <td>25</td>
+  <td><code>MCPCallRequest</code><br><small style="color:var(--muted)"></small></td>
+  <td><span class="tag tag-class">类</span></td>
+  <td>外部入口 / 无直接入边</td>
+  <td>无直接出边</td>
+  <td>项目 中的 MCPCallRequest 节点。</td>
+</tr>
+<tr>
+  <td>26</td>
+  <td><code>broadcast_agent_status()</code><br><small style="color:var(--muted)"></small></td>
+  <td><span class="tag tag-func">函数</span></td>
+  <td><code>approve_waterfall_gate()</code><br><code>broadcast_agent_trace()</code><br><code>mock_agent_execution_loop()</code></td>
+  <td>无直接出边</td>
+  <td>项目 中的 broadcast_agent_status() 节点。</td>
+</tr>
+<tr>
+  <td>27</td>
+  <td><code>broadcast_agent_trace()</code><br><small style="color:var(--muted)"></small></td>
+  <td><span class="tag tag-func">函数</span></td>
+  <td><code>forward_agent_trace()</code><br><code>mock_agent_execution_loop()</code></td>
+  <td><code>broadcast_agent_status()</code></td>
+  <td>项目 中的 broadcast_agent_trace() 节点。</td>
+</tr>
+<tr>
+  <td>28</td>
+  <td><code>Any</code><br><small style="color:var(--muted)"></small></td>
+  <td><span class="tag tag-class">类</span></td>
+  <td>外部入口 / 无直接入边</td>
+  <td>无直接出边</td>
+  <td>项目 中的 Any 节点。</td>
+</tr>
+<tr>
+  <td>29</td>
+  <td><code>update_file_content()</code><br><small style="color:var(--muted)"></small></td>
+  <td><span class="tag tag-func">函数</span></td>
+  <td><code>approve_waterfall_gate()</code><br><code>mock_agent_execution_loop()</code><br><code>start_task()</code></td>
+  <td>无直接出边</td>
+  <td>项目 中的 update_file_content() 节点。</td>
+</tr>
+<tr>
+  <td>30</td>
+  <td><code>Path</code><br><small style="color:var(--muted)"></small></td>
+  <td><span class="tag tag-class">类</span></td>
+  <td>外部入口 / 无直接入边</td>
+  <td>无直接出边</td>
+  <td>项目 中的 Path 节点。</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>关键文件</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>覆盖节点</th></tr>
+      <tr><td colspan="2">无源文件映射</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>设计备注</h4>
+    <p>本节由 graphify 社区聚类生成。关系概况：包含 x107, 说明 x32, references x30, 调用 x29。图表优先展示高置信、跨节点调用或使用关系，完整节点清单位于表格中。</p>
+  </div>
+</div>
+<hr>
+
+<h2 id="stats">Project Statistics</h2>
+
+<div class="grid">
+  <div class="card">
+    <h4>Graph</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><td>Nodes</td><td>188</td></tr>
+      <tr><td>Edges</td><td>285</td></tr>
+      <tr><td>Hyperedges</td><td>0</td></tr>
+      <tr><td>Communities</td><td>1</td></tr>
+      <tr><td>Documented Sections</td><td>1</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Edge Confidence</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><td>EXTRACTED</td><td>285</td></tr>
+      <tr><td>INFERRED</td><td>0</td></tr>
+      <tr><td>AMBIGUOUS</td><td>0</td></tr>
+    </table>
+  </div>
+</div>
+
+<div style="text-align:center; padding:40px 0; color: var(--muted); font-size:0.9rem;">
+  <p>knowledge-graph — Architecture Documentation</p>
+  <p>Generated: 2026-10-04 01:52 UTC · graphify callflow-html</p>
+</div>
+
+</div><!-- .container -->
+
+<script>
+(function () {
+  const mermaidConfig = {
+    startOnLoad: false,
+    theme: 'dark',
+    securityLevel: 'loose',
+    flowchart: { htmlLabels: true, useMaxWidth: true },
+    themeVariables: {
+      primaryColor: '#1e293b',
+      primaryTextColor: '#e2e8f0',
+      primaryBorderColor: '#38bdf8',
+      secondaryColor: '#0f172a',
+      tertiaryColor: '#334155',
+      lineColor: '#64748b',
+      textColor: '#e2e8f0',
+    }
+  };
+
+  mermaid.initialize(mermaidConfig);
+
+  function clamp(value, min, max) {
+    return Math.min(max, Math.max(min, value));
+  }
+
+  function enhanceMermaidDiagrams() {
+    document.querySelectorAll('.mermaid').forEach((container) => {
+      if (container.dataset.zoomReady === 'true') return;
+      const svg = container.querySelector('svg');
+      if (!svg) return;
+
+      container.dataset.zoomReady = 'true';
+      container.classList.add('is-enhanced');
+
+      const viewport = document.createElement('div');
+      viewport.className = 'mermaid-viewport';
+      svg.parentNode.insertBefore(viewport, svg);
+      viewport.appendChild(svg);
+
+      const toolbar = document.createElement('div');
+      toolbar.className = 'mermaid-toolbar';
+      toolbar.innerHTML = [
+        '<button type="button" data-action="zoom-out" title="Zoom out">-</button>',
+        '<span class="zoom-level" data-role="level">100%</span>',
+        '<button type="button" data-action="zoom-in" title="Zoom in">+</button>',
+        '<button type="button" data-action="fit" title="Fit width">Fit</button>',
+        '<button type="button" data-action="reset" title="Reset view">Reset</button>'
+      ].join('');
+      container.insertBefore(toolbar, viewport);
+
+      const state = { scale: 1, x: 0, y: 0, dragging: false, startX: 0, startY: 0, originX: 0, originY: 0 };
+      const level = toolbar.querySelector('[data-role="level"]');
+
+      function applyTransform() {
+        svg.style.transform = `translate(${state.x}px, ${state.y}px) scale(${state.scale})`;
+        level.textContent = `${Math.round(state.scale * 100)}%`;
+      }
+
+      function zoomBy(delta) {
+        state.scale = clamp(state.scale + delta, 0.25, 3);
+        applyTransform();
+      }
+
+      function reset() {
+        state.scale = 1;
+        state.x = 0;
+        state.y = 0;
+        applyTransform();
+      }
+
+      function fitWidth() {
+        const rawWidth = svg.viewBox && svg.viewBox.baseVal && svg.viewBox.baseVal.width
+          ? svg.viewBox.baseVal.width
+          : svg.getBoundingClientRect().width / state.scale;
+        if (!rawWidth) {
+          reset();
+          return;
+        }
+        state.scale = clamp((viewport.clientWidth - 48) / rawWidth, 0.25, 1.4);
+        state.x = 0;
+        state.y = 0;
+        applyTransform();
+      }
+
+      toolbar.addEventListener('click', (event) => {
+        const button = event.target.closest('button[data-action]');
+        if (!button) return;
+        const action = button.dataset.action;
+        if (action === 'zoom-in') zoomBy(0.15);
+        if (action === 'zoom-out') zoomBy(-0.15);
+        if (action === 'fit') fitWidth();
+        if (action === 'reset') reset();
+      });
+
+      viewport.addEventListener('wheel', (event) => {
+        if (!event.ctrlKey && !event.metaKey) return;
+        event.preventDefault();
+        zoomBy(event.deltaY < 0 ? 0.1 : -0.1);
+      }, { passive: false });
+
+      viewport.addEventListener('pointerdown', (event) => {
+        if (event.button !== 0) return;
+        state.dragging = true;
+        state.startX = event.clientX;
+        state.startY = event.clientY;
+        state.originX = state.x;
+        state.originY = state.y;
+        viewport.classList.add('is-dragging');
+        viewport.setPointerCapture(event.pointerId);
+      });
+
+      viewport.addEventListener('pointermove', (event) => {
+        if (!state.dragging) return;
+        state.x = state.originX + event.clientX - state.startX;
+        state.y = state.originY + event.clientY - state.startY;
+        applyTransform();
+      });
+
+      function endDrag(event) {
+        if (!state.dragging) return;
+        state.dragging = false;
+        viewport.classList.remove('is-dragging');
+        if (viewport.hasPointerCapture(event.pointerId)) {
+          viewport.releasePointerCapture(event.pointerId);
+        }
+      }
+
+      viewport.addEventListener('pointerup', endDrag);
+      viewport.addEventListener('pointercancel', endDrag);
+      applyTransform();
+    });
+  }
+
+  function renderMermaid() {
+    const result = mermaid.run
+      ? mermaid.run({ querySelector: '.mermaid' })
+      : Promise.resolve();
+    Promise.resolve(result)
+      .then(enhanceMermaidDiagrams)
+      .catch((error) => {
+        console.error('Mermaid render failed:', error);
+        enhanceMermaidDiagrams();
+      });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', renderMermaid);
+  } else {
+    renderMermaid();
+  }
+})();
+</script>
+
+</body>
+</html>

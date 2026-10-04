@@ -1,0 +1,441 @@
+graph TD
+    readme_setup["README_SETUP.md"]
+    readme_setup_vibe_os_visualized_agile_waterfall_hybrid_development_system["Vibe OS: Visualized Agile/Waterfall Hybrid Development System"]
+    readme_setup_directory_overview["Directory Overview"]
+    readme_setup_quick_start_guide["Quick Start Guide"]
+    readme_setup_step_1_start_the_go_websocket_gateway_backend_go["Step 1: Start the Go WebSocket Gateway (`backend-go`)"]
+    readme_setup_step_2_start_the_python_agent_backend_agent_python["Step 2: Start the Python Agent Backend (`agent-python`)"]
+    readme_setup_step_3_launch_the_frontend_control_dashboard_frontend["Step 3: Launch the Frontend Control Dashboard (`frontend`)"]
+    readme_setup_interactive_workflow_verification["Interactive Workflow Verification"]
+    readme_setup_security_environment_integrity["Security & Environment Integrity"]
+    agent_python_graph_service["graph_service.py"]
+    agent_python_graph_service_ensure_graph_exists["ensure_graph_exists()"]
+    agent_python_graph_service_py_any["Any"]
+    agent_python_graph_service_find_matching_nodes["find_matching_nodes()"]
+    agent_python_graph_service_query_code_graph["query_code_graph()"]
+    agent_python_graph_service_rationale_1["Graph Service for Vibe OS Agent =============================== Provides local…"]
+    agent_python_graph_service_rationale_22["Loads knowledge_graph.json, generating it via graphify_engine.py if missing."]
+    agent_python_graph_service_rationale_38["Fuzzy searches nodes by id or label."]
+    agent_python_graph_service_rationale_50["Queries Graphify knowledge graph to inspect code dependencies, architecture…"]
+    agent_python_main["main.py"]
+    agent_python_main_taskstartrequest["TaskStartRequest"]
+    basemodel["BaseModel"]
+    agent_python_main_approvalrequest["ApprovalRequest"]
+    agent_python_main_graphqueryrequest["GraphQueryRequest"]
+    agent_python_main_agenttracerequest["AgentTraceRequest"]
+    agent_python_main_mcpcallrequest["MCPCallRequest"]
+    agent_python_main_broadcast_agent_status["broadcast_agent_status()"]
+    agent_python_main_broadcast_agent_trace["broadcast_agent_trace()"]
+    agent_python_main_py_any["Any"]
+    agent_python_main_update_file_content["update_file_content()"]
+    agent_python_main_py_path["Path"]
+    agent_python_main_mock_agent_execution_loop["mock_agent_execution_loop()"]
+    get["get"]
+    agent_python_main_read_root["read_root()"]
+    agent_python_main_get_current_state["get_current_state()"]
+    post["post"]
+    agent_python_main_start_task["start_task()"]
+    backgroundtasks["BackgroundTasks"]
+    agent_python_main_approve_waterfall_gate["approve_waterfall_gate()"]
+    agent_python_main_graph_query["graph_query()"]
+    agent_python_main_forward_agent_trace["forward_agent_trace()"]
+    agent_python_main_get_mcp_tools["get_mcp_tools()"]
+    agent_python_main_call_mcp_tool["call_mcp_tool()"]
+    agent_python_main_rationale_71["Sends log payloads to Go WebSocket gateway for real-time frontend streaming."]
+    agent_python_main_rationale_86["Broadcasts detailed agent thinking path and knowledge graph reasoning to Go…"]
+    agent_python_main_rationale_92["Safely reads/writes content to control-state markdown files."]
+    agent_python_main_rationale_100["Vibe Coding agent execution loop integrated with Graphify Knowledge Graph.…"]
+    agent_python_main_rationale_193["Returns the current state from control-state files."]
+    agent_python_main_rationale_209["Endpoint to launch a new Vibe Coding agent task execution loop."]
+    agent_python_main_rationale_236["Endpoint for human sign-off approving the waterfall gate."]
+    agent_python_main_rationale_276["REST endpoint for querying Graphify code knowledge graph."]
+    agent_python_main_rationale_283["Forwards an agent's reasoning/thinking trace directly to the Go WebSocket…"]
+    agent_python_main_rationale_295["Returns standard MCP tool definitions available in Vibe OS."]
+    agent_python_main_rationale_323["Executes an MCP tool call (query_code_graph) and returns standardized content."]
+    backend_go_main["main.go"]
+    backend_go_agentstatuspayload["AgentStatusPayload"]
+    backend_go_hub["Hub"]
+    backend_go_main_newhub["newHub()"]
+    backend_go_hub_run[".run()"]
+    backend_go_main_enablecors["enableCORS()"]
+    backend_go_main_main["main()"]
+    control_state_decisions["DECISIONS.md"]
+    control_state_decisions_human_waterfall_decisions_log["Human Waterfall Decisions Log"]
+    control_state_decisions_initial_log["[Initial Log]"]
+    control_state_decisions_decision_record_2026_09_21t05_15_00_893509z["Decision Record - 2026-09-21T05:15:00.893509Z"]
+    control_state_goal["GOAL.md"]
+    control_state_goal_system_goal_vibe_coding_hybrid_agile_waterfall_development_os_vibe_os["System Goal: Vibe Coding & Hybrid Agile/Waterfall Development OS (vibe-os)"]
+    control_state_goal_objective["Objective"]
+    control_state_goal_core_capabilities["Core Capabilities"]
+    control_state_handoff["HANDOFF.md"]
+    control_state_handoff_agent_handoff_log["Agent Handoff Log"]
+    control_state_handoff_initial_handoff_template["[Initial Handoff Template]"]
+    control_state_handoff_handoff_record_2026_09_21t05_14_21_292282z["Handoff Record - 2026-09-21T05:14:21.292282Z"]
+    control_state_handoff_handoff_record_2026_09_21t11_42_29_295052z["Handoff Record - 2026-09-21T11:42:29.295052Z"]
+    control_state_state["STATE.md"]
+    control_state_state_current_system_state["Current System State"]
+    control_state_tasks["TASKS.md"]
+    control_state_tasks_agile_backlog_tasks["Agile Backlog (TASKS)"]
+    control_state_tasks_sprint_1["Sprint 1"]
+    reports_graphify_integration_report["graphify-integration-report.md"]
+    reports_graphify_integration_report_graphify___________aiops__________["Graphify 本地知識圖譜整合與 AIOps 自癒工作流架構報告"]
+    reports_graphify_integration_report______executive_summary["執行摘要 (Executive Summary)"]
+    reports_graphify_integration_report________deliverables["交付成果清單 (Deliverables)"]
+    reports_graphify_integration_report_1_graphify___________["1. Graphify 初始化腳本與掃描引擎"]
+    reports_graphify_integration_report_2_python_agent_____mcp_______["2. Python Agent 擴充與 MCP 知識查詢邏輯"]
+    reports_graphify_integration_report_3_ci_cd____________["3. CI/CD 自癒流程與安全審批門禁"]
+    reports_graphify_integration_report_____________security_governance_compliance["資安與治理規則合規說明 (Security & Governance Compliance)"]
+    reports_graphify_integration_report_________verification_test_results["測試與驗證數據 (Verification & Test Results)"]
+    reports_graphify_integration_report_1________["1. 單元與整合測試"]
+    reports_graphify_integration_report_2_______["2. 後端編譯驗證"]
+    reports_graphify_integration_report_____["後續步驟"]
+    scripts_graphify_engine["graphify_engine.py"]
+    scripts_graphify_engine_upgradedvibegraphifyengine["UpgradedVibeGraphifyEngine"]
+    scripts_graphify_engine_upgradedvibegraphifyengine_init[".__init__()"]
+    scripts_graphify_engine_py_path["Path"]
+    scripts_graphify_engine_upgradedvibegraphifyengine_add_node[".add_node()"]
+    scripts_graphify_engine_py_any["Any"]
+    scripts_graphify_engine_upgradedvibegraphifyengine_add_edge[".add_edge()"]
+    scripts_graphify_engine_upgradedvibegraphifyengine_scan_codebase_ast[".scan_codebase_ast()"]
+    scripts_graphify_engine_upgradedvibegraphifyengine_scan_markdown_specifications[".scan_markdown_specifications()"]
+    scripts_graphify_engine_upgradedvibegraphifyengine_link_services_and_tasks[".link_services_and_tasks()"]
+    scripts_graphify_engine_upgradedvibegraphifyengine_build_networkx_graph[".build_networkx_graph()"]
+    scripts_graphify_engine_upgradedvibegraphifyengine_export[".export()"]
+    scripts_graphify_engine_main["main()"]
+    scripts_graphify_engine_rationale_2["Upgraded Graphify Engine for Vibe OS =====================================…"]
+    scripts_graphify_engine_rationale_82["Uses Graphify Tree-sitter parsers to extract all AST nodes and edges across…"]
+    scripts_graphify_engine_rationale_135["Scans GOAL.md, TASKS.md, STATE.md for high-level architecture intent."]
+    scripts_graphify_engine_rationale_180["Creates top-level service groupings and connects tasks to implementations."]
+    scripts_graphify_engine_rationale_209["Constructs a NetworkX graph with node and edge attributes."]
+    scripts_graphify_engine_rationale_218["Exports all knowledge graph representations: JSON, DOT, Mermaid, D3 HTML,…"]
+    scripts_init_graphify["init_graphify.sh"]
+    scripts_init_graphify_sh__entry["init_graphify.sh script"]
+    start["start.sh"]
+    start_sh__entry["start.sh script"]
+    start_cleanup["cleanup()"]
+    tests_e2e_telemetry_test["e2e_telemetry_test.py"]
+    tests_e2e_telemetry_test_testvibeoscontrolstate["TestVibeOSControlState"]
+    tests_e2e_telemetry_test_testvibeoscontrolstate_setup[".setUp()"]
+    tests_e2e_telemetry_test_testvibeoscontrolstate_test_state_file_exists[".test_state_file_exists()"]
+    tests_e2e_telemetry_test_testvibeoscontrolstate_test_gate_transition_validity[".test_gate_transition_validity()"]
+    tests_e2e_telemetry_test_testvibeoscontrolstate_test_handoff_log_integrity[".test_handoff_log_integrity()"]
+    tests_e2e_telemetry_test_rationale_1["E2E Telemetry & State Gate Verification Test Suite for Vibe OS Verifies…"]
+    tests_e2e_telemetry_test_rationale_17["Verify STATE.md exists and is readable."]
+    tests_e2e_telemetry_test_rationale_26["Verify Waterfall Gate is in a valid state (PASSED, PENDING_APPROVAL, or ACTIVE)."]
+    tests_e2e_telemetry_test_rationale_36["Verify HANDOFF.md contains valid handoff records with sign-off details."]
+    tests_test_graphify_integration["test_graphify_integration.py"]
+    tests_test_graphify_integration_testgraphifyintegration["TestGraphifyIntegration"]
+    tests_test_graphify_integration_testgraphifyintegration_setupclass[".setUpClass()"]
+    tests_test_graphify_integration_testgraphifyintegration_test_knowledge_graph_json_structure[".test_knowledge_graph_json_structure()"]
+    tests_test_graphify_integration_testgraphifyintegration_test_dot_and_mermaid_artifacts[".test_dot_and_mermaid_artifacts()"]
+    tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_overview[".test_query_code_graph_overview()"]
+    tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_dependencies[".test_query_code_graph_dependencies()"]
+    tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_impact_analysis[".test_query_code_graph_impact_analysis()"]
+    tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_task_mapping[".test_query_code_graph_task_mapping()"]
+    tests_test_graphify_integration_rationale_1["Test Suite for Graphify Integration & MCP Code Graph Querying in Vibe OS"]
+    tests_test_graphify_integration_rationale_25["Verify knowledge_graph.json exists and contains correct schema."]
+    tests_test_graphify_integration_rationale_45["Verify DOT and Mermaid diagrams are generated."]
+    tests_test_graphify_integration_rationale_59["Verify overview query returns complete topology."]
+    tests_test_graphify_integration_rationale_68["Verify dependency query on main.py returns connections."]
+    tests_test_graphify_integration_rationale_76["Verify blast radius impact analysis computes risk level."]
+    tests_test_graphify_integration_rationale_84["Verify task mapping can find code nodes related to tasks."]
+    go_type_github_com_gorilla_websocket_conn["github.com/gorilla/websocket.Conn"]
+    go_type_sync_rwmutex["sync.RWMutex"]
+    go_type_net_http_responsewriter["net/http.ResponseWriter"]
+    goal_system["System Goal (Vibe OS)"]
+    capability_real_time_log_streaming["Capability: Real-time Log Streaming"]
+    capability_state_machine_governance["Capability: State Machine Governance"]
+    capability_markdown_driven_source_of_truth["Capability: Markdown-driven Source of Truth"]
+    task_TASK_001["Task [TASK-001]: Initialize Go WebSocket Gateway & broadcasting routing"]
+    task_TASK_002["Task [TASK-002]: Build FastAPI mock agent execution loop & status hook"]
+    task_TASK_003["Task [TASK-003]: Construct Cyberpunk Dark Mode Frontend Control Panel"]
+    task_TASK_004["Task [TASK-004]: Integrate Waterfall Human Approval Gate & Handoff logging"]
+    state_system["System State Machine"]
+    service_agent_python["Service: Python Agent (FastAPI)"]
+    service_backend_go["Service: Go WebSocket Gateway"]
+    service_frontend["Service: Frontend Dashboard"]
+    readme_setup -->|contains| readme_setup_vibe_os_visualized_agile_waterfall_hybrid_development_system
+    readme_setup_vibe_os_visualized_agile_waterfall_hybrid_development_system -->|contains| readme_setup_directory_overview
+    readme_setup_vibe_os_visualized_agile_waterfall_hybrid_development_system -->|contains| readme_setup_quick_start_guide
+    readme_setup_quick_start_guide -->|contains| readme_setup_step_1_start_the_go_websocket_gateway_backend_go
+    readme_setup_quick_start_guide -->|contains| readme_setup_step_2_start_the_python_agent_backend_agent_python
+    readme_setup_quick_start_guide -->|contains| readme_setup_step_3_launch_the_frontend_control_dashboard_frontend
+    readme_setup_vibe_os_visualized_agile_waterfall_hybrid_development_system -->|contains| readme_setup_interactive_workflow_verification
+    readme_setup_vibe_os_visualized_agile_waterfall_hybrid_development_system -->|contains| readme_setup_security_environment_integrity
+    agent_python_graph_service -->|imports| json
+    agent_python_graph_service -->|imports| os
+    agent_python_graph_service -->|imports| subprocess
+    agent_python_graph_service -->|imports_from| pathlib
+    agent_python_graph_service -->|imports_from| typing
+    agent_python_graph_service -->|contains| agent_python_graph_service_ensure_graph_exists
+    agent_python_graph_service_ensure_graph_exists -->|references| agent_python_graph_service_py_any
+    agent_python_graph_service -->|contains| agent_python_graph_service_find_matching_nodes
+    agent_python_graph_service_find_matching_nodes -->|references| agent_python_graph_service_py_any
+    agent_python_graph_service -->|contains| agent_python_graph_service_query_code_graph
+    agent_python_graph_service_query_code_graph -->|references| agent_python_graph_service_py_any
+    agent_python_graph_service_query_code_graph -->|calls| agent_python_graph_service_ensure_graph_exists
+    agent_python_graph_service_query_code_graph -->|calls| agent_python_graph_service_find_matching_nodes
+    agent_python_graph_service_rationale_1 -->|rationale_for| agent_python_graph_service
+    agent_python_graph_service_rationale_22 -->|rationale_for| agent_python_graph_service_ensure_graph_exists
+    agent_python_graph_service_rationale_38 -->|rationale_for| agent_python_graph_service_find_matching_nodes
+    agent_python_graph_service_rationale_50 -->|rationale_for| agent_python_graph_service_query_code_graph
+    agent_python_main -->|imports| asyncio
+    agent_python_main -->|imports_from| datetime
+    agent_python_main -->|imports| json
+    agent_python_main -->|imports| os
+    agent_python_main -->|imports_from| pathlib
+    agent_python_main -->|imports_from| typing
+    agent_python_main -->|imports_from| fastapi
+    agent_python_main -->|imports_from| fastapi_middleware_cors
+    agent_python_main -->|imports_from| pydantic
+    agent_python_main -->|imports| requests
+    agent_python_main -->|imports_from| agent_python_graph_service
+    agent_python_main -->|contains| agent_python_main_taskstartrequest
+    agent_python_main_taskstartrequest -->|inherits| basemodel
+    agent_python_main -->|contains| agent_python_main_approvalrequest
+    agent_python_main_approvalrequest -->|inherits| basemodel
+    agent_python_main -->|contains| agent_python_main_graphqueryrequest
+    agent_python_main_graphqueryrequest -->|inherits| basemodel
+    agent_python_main -->|contains| agent_python_main_agenttracerequest
+    agent_python_main_agenttracerequest -->|inherits| basemodel
+    agent_python_main -->|contains| agent_python_main_mcpcallrequest
+    agent_python_main_mcpcallrequest -->|inherits| basemodel
+    agent_python_main -->|contains| agent_python_main_broadcast_agent_status
+    agent_python_main -->|contains| agent_python_main_broadcast_agent_trace
+    agent_python_main_broadcast_agent_trace -->|references| agent_python_main_py_any
+    agent_python_main -->|contains| agent_python_main_update_file_content
+    agent_python_main_update_file_content -->|references| agent_python_main_py_path
+    agent_python_main -->|contains| agent_python_main_mock_agent_execution_loop
+    agent_python_main_read_root -->|references| get
+    agent_python_main -->|contains| agent_python_main_read_root
+    agent_python_main_get_current_state -->|references| get
+    agent_python_main -->|contains| agent_python_main_get_current_state
+    agent_python_main_start_task -->|references| post
+    agent_python_main -->|contains| agent_python_main_start_task
+    agent_python_main_start_task -->|references| agent_python_main_taskstartrequest
+    agent_python_main_start_task -->|references| backgroundtasks
+    agent_python_main_approve_waterfall_gate -->|references| post
+    agent_python_main -->|contains| agent_python_main_approve_waterfall_gate
+    agent_python_main_approve_waterfall_gate -->|references| agent_python_main_approvalrequest
+    agent_python_main_graph_query -->|references| post
+    agent_python_main -->|contains| agent_python_main_graph_query
+    agent_python_main_graph_query -->|references| agent_python_main_graphqueryrequest
+    agent_python_main_forward_agent_trace -->|references| post
+    agent_python_main -->|contains| agent_python_main_forward_agent_trace
+    agent_python_main_forward_agent_trace -->|references| agent_python_main_agenttracerequest
+    agent_python_main_get_mcp_tools -->|references| get
+    agent_python_main -->|contains| agent_python_main_get_mcp_tools
+    agent_python_main_call_mcp_tool -->|references| post
+    agent_python_main -->|contains| agent_python_main_call_mcp_tool
+    agent_python_main_call_mcp_tool -->|references| agent_python_main_mcpcallrequest
+    agent_python_main -->|imports| uvicorn
+    agent_python_main_broadcast_agent_trace -->|calls| agent_python_main_broadcast_agent_status
+    agent_python_main_mock_agent_execution_loop -->|calls| agent_python_main_broadcast_agent_status
+    agent_python_main_mock_agent_execution_loop -->|calls| agent_python_main_broadcast_agent_trace
+    agent_python_main_mock_agent_execution_loop -->|calls| agent_python_main_update_file_content
+    agent_python_main_start_task -->|indirect_call| agent_python_main_mock_agent_execution_loop
+    agent_python_main_start_task -->|calls| agent_python_main_update_file_content
+    agent_python_main_approve_waterfall_gate -->|calls| agent_python_main_broadcast_agent_status
+    agent_python_main_approve_waterfall_gate -->|calls| agent_python_main_update_file_content
+    agent_python_main_forward_agent_trace -->|calls| agent_python_main_broadcast_agent_trace
+    agent_python_main_rationale_71 -->|rationale_for| agent_python_main_broadcast_agent_status
+    agent_python_main_rationale_86 -->|rationale_for| agent_python_main_broadcast_agent_trace
+    agent_python_main_rationale_92 -->|rationale_for| agent_python_main_update_file_content
+    agent_python_main_rationale_100 -->|rationale_for| agent_python_main_mock_agent_execution_loop
+    agent_python_main_rationale_193 -->|rationale_for| agent_python_main_get_current_state
+    agent_python_main_rationale_209 -->|rationale_for| agent_python_main_start_task
+    agent_python_main_rationale_236 -->|rationale_for| agent_python_main_approve_waterfall_gate
+    agent_python_main_rationale_276 -->|rationale_for| agent_python_main_graph_query
+    agent_python_main_rationale_283 -->|rationale_for| agent_python_main_forward_agent_trace
+    agent_python_main_rationale_295 -->|rationale_for| agent_python_main_get_mcp_tools
+    agent_python_main_rationale_323 -->|rationale_for| agent_python_main_call_mcp_tool
+    backend_go_main -->|imports_from| go_pkg_encoding_json
+    backend_go_main -->|imports_from| go_pkg_fmt
+    backend_go_main -->|imports_from| go_pkg_io
+    backend_go_main -->|imports_from| go_pkg_log
+    backend_go_main -->|imports_from| go_pkg_net_http
+    backend_go_main -->|imports_from| go_pkg_sync
+    backend_go_main -->|imports_from| go_pkg_time
+    backend_go_main -->|imports_from| go_pkg_github_com_gorilla_websocket
+    backend_go_main -->|contains| backend_go_agentstatuspayload
+    backend_go_main -->|contains| backend_go_hub
+    backend_go_hub -->|references| go_type_github_com_gorilla_websocket_conn
+    backend_go_hub -->|references| backend_go_agentstatuspayload
+    backend_go_hub -->|references| go_type_sync_rwmutex
+    backend_go_main -->|contains| backend_go_main_newhub
+    backend_go_main_newhub -->|references| backend_go_hub
+    backend_go_hub -->|method| backend_go_hub_run
+    backend_go_main -->|contains| backend_go_main_enablecors
+    backend_go_main_enablecors -->|references| go_type_net_http_responsewriter
+    backend_go_main -->|contains| backend_go_main_main
+    backend_go_main_main -->|calls| backend_go_main_newhub
+    backend_go_main_main -->|calls| backend_go_hub_run
+    backend_go_main_main -->|calls| backend_go_main_enablecors
+    control_state_decisions -->|contains| control_state_decisions_human_waterfall_decisions_log
+    control_state_decisions_human_waterfall_decisions_log -->|contains| control_state_decisions_initial_log
+    control_state_decisions_human_waterfall_decisions_log -->|contains| control_state_decisions_decision_record_2026_09_21t05_15_00_893509z
+    control_state_goal -->|contains| control_state_goal_system_goal_vibe_coding_hybrid_agile_waterfall_development_os_vibe_os
+    control_state_goal_system_goal_vibe_coding_hybrid_agile_waterfall_development_os_vibe_os -->|contains| control_state_goal_objective
+    control_state_goal_system_goal_vibe_coding_hybrid_agile_waterfall_development_os_vibe_os -->|contains| control_state_goal_core_capabilities
+    control_state_handoff -->|contains| control_state_handoff_agent_handoff_log
+    control_state_handoff_agent_handoff_log -->|contains| control_state_handoff_initial_handoff_template
+    control_state_handoff_agent_handoff_log -->|contains| control_state_handoff_handoff_record_2026_09_21t05_14_21_292282z
+    control_state_handoff_agent_handoff_log -->|contains| control_state_handoff_handoff_record_2026_09_21t11_42_29_295052z
+    control_state_state -->|contains| control_state_state_current_system_state
+    control_state_tasks -->|contains| control_state_tasks_agile_backlog_tasks
+    control_state_tasks_agile_backlog_tasks -->|contains| control_state_tasks_sprint_1
+    reports_graphify_integration_report -->|contains| reports_graphify_integration_report_graphify___________aiops__________
+    reports_graphify_integration_report_graphify___________aiops__________ -->|contains| reports_graphify_integration_report______executive_summary
+    reports_graphify_integration_report_graphify___________aiops__________ -->|contains| reports_graphify_integration_report________deliverables
+    reports_graphify_integration_report________deliverables -->|contains| reports_graphify_integration_report_1_graphify___________
+    reports_graphify_integration_report________deliverables -->|contains| reports_graphify_integration_report_2_python_agent_____mcp_______
+    reports_graphify_integration_report________deliverables -->|contains| reports_graphify_integration_report_3_ci_cd____________
+    reports_graphify_integration_report_graphify___________aiops__________ -->|contains| reports_graphify_integration_report_____________security_governance_compliance
+    reports_graphify_integration_report_graphify___________aiops__________ -->|contains| reports_graphify_integration_report_________verification_test_results
+    reports_graphify_integration_report_________verification_test_results -->|contains| reports_graphify_integration_report_1________
+    reports_graphify_integration_report_________verification_test_results -->|contains| reports_graphify_integration_report_2_______
+    reports_graphify_integration_report_graphify___________aiops__________ -->|contains| reports_graphify_integration_report_____
+    scripts_graphify_engine -->|imports| ast
+    scripts_graphify_engine -->|imports| json
+    scripts_graphify_engine -->|imports| os
+    scripts_graphify_engine -->|imports| re
+    scripts_graphify_engine -->|imports| sys
+    scripts_graphify_engine -->|imports_from| pathlib
+    scripts_graphify_engine -->|imports_from| typing
+    scripts_graphify_engine -->|imports| networkx
+    scripts_graphify_engine -->|imports_from| graphify_extract
+    scripts_graphify_engine -->|imports_from| graphify_build
+    scripts_graphify_engine -->|imports_from| graphify_cluster
+    scripts_graphify_engine -->|imports_from| graphify_analyze
+    scripts_graphify_engine -->|imports_from| graphify_export
+    scripts_graphify_engine -->|imports_from| graphify_report
+    scripts_graphify_engine -->|imports_from| graphify_callflow_html
+    scripts_graphify_engine -->|contains| scripts_graphify_engine_upgradedvibegraphifyengine
+    scripts_graphify_engine_upgradedvibegraphifyengine -->|method| scripts_graphify_engine_upgradedvibegraphifyengine_init
+    scripts_graphify_engine_upgradedvibegraphifyengine_init -->|references| scripts_graphify_engine_py_path
+    scripts_graphify_engine_upgradedvibegraphifyengine -->|method| scripts_graphify_engine_upgradedvibegraphifyengine_add_node
+    scripts_graphify_engine_upgradedvibegraphifyengine_add_node -->|references| scripts_graphify_engine_py_any
+    scripts_graphify_engine_upgradedvibegraphifyengine -->|method| scripts_graphify_engine_upgradedvibegraphifyengine_add_edge
+    scripts_graphify_engine_upgradedvibegraphifyengine_add_edge -->|references| scripts_graphify_engine_py_any
+    scripts_graphify_engine_upgradedvibegraphifyengine -->|method| scripts_graphify_engine_upgradedvibegraphifyengine_scan_codebase_ast
+    scripts_graphify_engine_upgradedvibegraphifyengine -->|method| scripts_graphify_engine_upgradedvibegraphifyengine_scan_markdown_specifications
+    scripts_graphify_engine_upgradedvibegraphifyengine -->|method| scripts_graphify_engine_upgradedvibegraphifyengine_link_services_and_tasks
+    scripts_graphify_engine_upgradedvibegraphifyengine -->|method| scripts_graphify_engine_upgradedvibegraphifyengine_build_networkx_graph
+    scripts_graphify_engine_upgradedvibegraphifyengine_build_networkx_graph -->|references| scripts_graphify_engine_py_any
+    scripts_graphify_engine_upgradedvibegraphifyengine -->|method| scripts_graphify_engine_upgradedvibegraphifyengine_export
+    scripts_graphify_engine -->|contains| scripts_graphify_engine_main
+    scripts_graphify_engine_upgradedvibegraphifyengine_scan_codebase_ast -->|calls| scripts_graphify_engine_upgradedvibegraphifyengine_add_node
+    scripts_graphify_engine_upgradedvibegraphifyengine_scan_codebase_ast -->|calls| scripts_graphify_engine_upgradedvibegraphifyengine_add_edge
+    scripts_graphify_engine_upgradedvibegraphifyengine_scan_markdown_specifications -->|calls| scripts_graphify_engine_upgradedvibegraphifyengine_add_node
+    scripts_graphify_engine_upgradedvibegraphifyengine_scan_markdown_specifications -->|calls| scripts_graphify_engine_upgradedvibegraphifyengine_add_edge
+    scripts_graphify_engine_upgradedvibegraphifyengine_link_services_and_tasks -->|calls| scripts_graphify_engine_upgradedvibegraphifyengine_add_node
+    scripts_graphify_engine_upgradedvibegraphifyengine_link_services_and_tasks -->|calls| scripts_graphify_engine_upgradedvibegraphifyengine_add_edge
+    scripts_graphify_engine_upgradedvibegraphifyengine_export -->|calls| scripts_graphify_engine_upgradedvibegraphifyengine_build_networkx_graph
+    scripts_graphify_engine_main -->|calls| scripts_graphify_engine_upgradedvibegraphifyengine
+    scripts_graphify_engine_rationale_2 -->|rationale_for| scripts_graphify_engine
+    scripts_graphify_engine_rationale_82 -->|rationale_for| scripts_graphify_engine_upgradedvibegraphifyengine_scan_codebase_ast
+    scripts_graphify_engine_rationale_135 -->|rationale_for| scripts_graphify_engine_upgradedvibegraphifyengine_scan_markdown_specifications
+    scripts_graphify_engine_rationale_180 -->|rationale_for| scripts_graphify_engine_upgradedvibegraphifyengine_link_services_and_tasks
+    scripts_graphify_engine_rationale_209 -->|rationale_for| scripts_graphify_engine_upgradedvibegraphifyengine_build_networkx_graph
+    scripts_graphify_engine_rationale_218 -->|rationale_for| scripts_graphify_engine_upgradedvibegraphifyengine_export
+    scripts_init_graphify -->|contains| scripts_init_graphify_sh__entry
+    start -->|contains| start_sh__entry
+    start -->|defines| start_cleanup
+    tests_e2e_telemetry_test -->|imports| os
+    tests_e2e_telemetry_test -->|imports| re
+    tests_e2e_telemetry_test -->|imports| unittest
+    tests_e2e_telemetry_test -->|contains| tests_e2e_telemetry_test_testvibeoscontrolstate
+    tests_e2e_telemetry_test_testvibeoscontrolstate -->|method| tests_e2e_telemetry_test_testvibeoscontrolstate_setup
+    tests_e2e_telemetry_test_testvibeoscontrolstate -->|method| tests_e2e_telemetry_test_testvibeoscontrolstate_test_state_file_exists
+    tests_e2e_telemetry_test_testvibeoscontrolstate -->|method| tests_e2e_telemetry_test_testvibeoscontrolstate_test_gate_transition_validity
+    tests_e2e_telemetry_test_testvibeoscontrolstate -->|method| tests_e2e_telemetry_test_testvibeoscontrolstate_test_handoff_log_integrity
+    tests_e2e_telemetry_test_rationale_1 -->|rationale_for| tests_e2e_telemetry_test
+    tests_e2e_telemetry_test_rationale_17 -->|rationale_for| tests_e2e_telemetry_test_testvibeoscontrolstate_test_state_file_exists
+    tests_e2e_telemetry_test_rationale_26 -->|rationale_for| tests_e2e_telemetry_test_testvibeoscontrolstate_test_gate_transition_validity
+    tests_e2e_telemetry_test_rationale_36 -->|rationale_for| tests_e2e_telemetry_test_testvibeoscontrolstate_test_handoff_log_integrity
+    tests_test_graphify_integration -->|imports| json
+    tests_test_graphify_integration -->|imports| os
+    tests_test_graphify_integration -->|imports| sys
+    tests_test_graphify_integration -->|imports| unittest
+    tests_test_graphify_integration -->|imports_from| pathlib
+    tests_test_graphify_integration -->|imports_from| graph_service
+    tests_test_graphify_integration -->|contains| tests_test_graphify_integration_testgraphifyintegration
+    tests_test_graphify_integration_testgraphifyintegration -->|method| tests_test_graphify_integration_testgraphifyintegration_setupclass
+    tests_test_graphify_integration_testgraphifyintegration -->|method| tests_test_graphify_integration_testgraphifyintegration_test_knowledge_graph_json_structure
+    tests_test_graphify_integration_testgraphifyintegration -->|method| tests_test_graphify_integration_testgraphifyintegration_test_dot_and_mermaid_artifacts
+    tests_test_graphify_integration_testgraphifyintegration -->|method| tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_overview
+    tests_test_graphify_integration_testgraphifyintegration -->|method| tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_dependencies
+    tests_test_graphify_integration_testgraphifyintegration -->|method| tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_impact_analysis
+    tests_test_graphify_integration_testgraphifyintegration -->|method| tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_task_mapping
+    tests_test_graphify_integration_rationale_1 -->|rationale_for| tests_test_graphify_integration
+    tests_test_graphify_integration_rationale_25 -->|rationale_for| tests_test_graphify_integration_testgraphifyintegration_test_knowledge_graph_json_structure
+    tests_test_graphify_integration_rationale_45 -->|rationale_for| tests_test_graphify_integration_testgraphifyintegration_test_dot_and_mermaid_artifacts
+    tests_test_graphify_integration_rationale_59 -->|rationale_for| tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_overview
+    tests_test_graphify_integration_rationale_68 -->|rationale_for| tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_dependencies
+    tests_test_graphify_integration_rationale_76 -->|rationale_for| tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_impact_analysis
+    tests_test_graphify_integration_rationale_84 -->|rationale_for| tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_task_mapping
+    agent_python_main -->|imports| agent_python_graph_service_query_code_graph
+    agent_python_main_mock_agent_execution_loop -->|calls| agent_python_graph_service_query_code_graph
+    agent_python_main_graph_query -->|calls| agent_python_graph_service_query_code_graph
+    agent_python_main_call_mcp_tool -->|calls| agent_python_graph_service_query_code_graph
+    tests_test_graphify_integration_testgraphifyintegration_setupclass -->|calls| agent_python_graph_service_ensure_graph_exists
+    tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_overview -->|calls| agent_python_graph_service_query_code_graph
+    tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_dependencies -->|calls| agent_python_graph_service_query_code_graph
+    tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_impact_analysis -->|calls| agent_python_graph_service_query_code_graph
+    tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_task_mapping -->|calls| agent_python_graph_service_query_code_graph
+    reports_graphify_integration_report_2_python_agent_____mcp_______ -->|references| agent_python_graph_service_query_code_graph
+    reports_graphify_integration_report_2_python_agent_____mcp_______ -->|references| agent_python_main_mock_agent_execution_loop
+    goal_system -->|fulfills| capability_real_time_log_streaming
+    goal_system -->|fulfills| capability_state_machine_governance
+    goal_system -->|fulfills| capability_markdown_driven_source_of_truth
+    goal_system -->|tracks| task_TASK_001
+    goal_system -->|tracks| task_TASK_002
+    goal_system -->|tracks| task_TASK_003
+    goal_system -->|tracks| task_TASK_004
+    task_TASK_001 -->|implemented_by| service_backend_go
+    task_TASK_002 -->|implemented_by| service_agent_python
+    task_TASK_003 -->|implemented_by| service_frontend
+    service_agent_python -->|contains| agent_python_graph_service
+    service_agent_python -->|contains| agent_python_graph_service_ensure_graph_exists
+    service_agent_python -->|contains| agent_python_graph_service_find_matching_nodes
+    service_agent_python -->|contains| agent_python_graph_service_query_code_graph
+    service_agent_python -->|contains| agent_python_graph_service_rationale_1
+    service_agent_python -->|contains| agent_python_graph_service_rationale_22
+    service_agent_python -->|contains| agent_python_graph_service_rationale_38
+    service_agent_python -->|contains| agent_python_graph_service_rationale_50
+    service_agent_python -->|contains| agent_python_main
+    service_agent_python -->|contains| agent_python_main_taskstartrequest
+    service_agent_python -->|contains| agent_python_main_approvalrequest
+    service_agent_python -->|contains| agent_python_main_graphqueryrequest
+    service_agent_python -->|contains| agent_python_main_agenttracerequest
+    service_agent_python -->|contains| agent_python_main_mcpcallrequest
+    service_agent_python -->|contains| agent_python_main_broadcast_agent_status
+    service_agent_python -->|contains| agent_python_main_broadcast_agent_trace
+    service_agent_python -->|contains| agent_python_main_update_file_content
+    service_agent_python -->|contains| agent_python_main_mock_agent_execution_loop
+    service_agent_python -->|contains| agent_python_main_read_root
+    service_agent_python -->|contains| agent_python_main_get_current_state
+    service_agent_python -->|contains| agent_python_main_start_task
+    service_agent_python -->|contains| agent_python_main_approve_waterfall_gate
+    service_agent_python -->|contains| agent_python_main_graph_query
+    service_agent_python -->|contains| agent_python_main_forward_agent_trace
+    service_agent_python -->|contains| agent_python_main_get_mcp_tools
+    service_agent_python -->|contains| agent_python_main_call_mcp_tool
+    service_agent_python -->|contains| agent_python_main_rationale_71
+    service_agent_python -->|contains| agent_python_main_rationale_86
+    service_agent_python -->|contains| agent_python_main_rationale_92
+    service_agent_python -->|contains| agent_python_main_rationale_100
+    service_agent_python -->|contains| agent_python_main_rationale_193
+    service_agent_python -->|contains| agent_python_main_rationale_209
+    service_agent_python -->|contains| agent_python_main_rationale_236
+    service_agent_python -->|contains| agent_python_main_rationale_276
+    service_agent_python -->|contains| agent_python_main_rationale_283
+    service_agent_python -->|contains| agent_python_main_rationale_295
+    service_agent_python -->|contains| agent_python_main_rationale_323
+    service_backend_go -->|contains| backend_go_main
+    service_backend_go -->|contains| backend_go_agentstatuspayload
+    service_backend_go -->|contains| backend_go_hub
+    service_backend_go -->|contains| backend_go_main_newhub
+    service_backend_go -->|contains| backend_go_hub_run
+    service_backend_go -->|contains| backend_go_main_enablecors
+    service_backend_go -->|contains| backend_go_main_main

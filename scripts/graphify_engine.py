@@ -1,14 +1,18 @@
 #!/usr/bin/env python3
 """
-Graphify Engine for Vibe OS
-===========================
-Scans repository source code (Python AST, Go, Frontend JS/HTML) and Markdown specifications
-(GOAL.md, TASKS.md) to generate a comprehensive, structured knowledge graph.
+Upgraded Graphify Engine for Vibe OS
+=====================================
+Integrates the official Graphify AST analysis engine (Tree-sitter multi-language
+parsing, NetworkX graph construction, Leiden community clustering, and God-node analysis)
+with Vibe OS system specifications (GOAL.md, TASKS.md, STATE.md).
 
-Outputs:
-  - knowledge-graph/knowledge_graph.json
-  - knowledge-graph/knowledge_graph.dot
-  - knowledge-graph/knowledge_graph.mermaid
+Outputs in knowledge-graph/:
+  - knowledge_graph.json   (Full graph: AST nodes + architecture intent + communities)
+  - knowledge_graph.mermaid(Mermaid architectural flowchart)
+  - knowledge_graph.dot    (Graphviz DOT format)
+  - graph.html             (Interactive D3 graph visualization)
+  - GRAPH_REPORT.md        (Architectural report & God node analysis)
+  - callflow.html          (Mermaid architecture & call-flow view)
 """
 
 import ast
@@ -19,8 +23,31 @@ import sys
 from pathlib import Path
 from typing import Dict, List, Any
 
+# Ensure graphify engine is discoverable
+GRAPHIFY_SCRATCH_DIR = Path(__file__).resolve().parent.parent.parent / "graphify"
+VENV_SITE_PACKAGES = GRAPHIFY_SCRATCH_DIR / ".venv" / "lib" / "python3.12" / "site-packages"
 
-class GraphifyEngine:
+if VENV_SITE_PACKAGES.exists() and str(VENV_SITE_PACKAGES) not in sys.path:
+    sys.path.insert(0, str(VENV_SITE_PACKAGES))
+if GRAPHIFY_SCRATCH_DIR.exists() and str(GRAPHIFY_SCRATCH_DIR) not in sys.path:
+    sys.path.insert(0, str(GRAPHIFY_SCRATCH_DIR))
+
+try:
+    import networkx as nx
+    from graphify.extract import extract, collect_files
+    from graphify.build import build
+    from graphify.cluster import cluster
+    from graphify.analyze import god_nodes, surprising_connections
+    from graphify.export import to_html, to_json
+    from graphify.report import generate as generate_report
+    from graphify.callflow_html import write_callflow_html
+    GRAPHIFY_CORE_AVAILABLE = True
+except ImportError as err:
+    print(f"[Warning] Graphify core import warning: {err}. Falling back to standard AST parser.")
+    GRAPHIFY_CORE_AVAILABLE = False
+
+
+class UpgradedVibeGraphifyEngine:
     def __init__(self, root_dir: Path, output_dir: Path):
         self.root_dir = root_dir
         self.output_dir = output_dir
@@ -35,6 +62,9 @@ class GraphifyEngine:
                 "type": node_type,
                 "metadata": metadata or {}
             }
+        else:
+            if metadata:
+                self.nodes[node_id].setdefault("metadata", {}).update(metadata)
 
     def add_edge(self, source: str, target: str, relation: str, metadata: Dict[str, Any] = None):
         edge = {
@@ -43,11 +73,66 @@ class GraphifyEngine:
             "relation": relation,
             "metadata": metadata or {}
         }
-        if edge not in self.edges:
-            self.edges.append(edge)
+        for existing in self.edges:
+            if existing["source"] == source and existing["target"] == target and existing["relation"] == relation:
+                return
+        self.edges.append(edge)
+
+    def scan_codebase_ast(self):
+        """Uses Graphify Tree-sitter parsers to extract all AST nodes and edges across languages."""
+        if not GRAPHIFY_CORE_AVAILABLE:
+            print("[Notice] Using fallback AST scanner...")
+            return
+
+        print("[Graphify] Scanning codebase with Tree-sitter AST extractors...")
+        files = collect_files(self.root_dir, root=self.root_dir)
+        # Exclude generated output and virtual environments
+        scannable_files = [
+            f for f in files
+            if "knowledge-graph" not in f.parts
+            and ".venv" not in f.parts
+            and "node_modules" not in f.parts
+            and "__pycache__" not in f.parts
+        ]
+        print(f"[Graphify] Scannable source files identified: {len(scannable_files)}")
+
+        extraction = extract(scannable_files, root=self.root_dir)
+        ast_nodes = extraction.get("nodes", [])
+        ast_edges = extraction.get("edges", [])
+
+        print(f"[Graphify] Extracted {len(ast_nodes)} AST nodes and {len(ast_edges)} AST edges.")
+
+        for n in ast_nodes:
+            nid = n.get("id")
+            nlabel = n.get("label", nid)
+            nfile = n.get("source_file", "")
+            nloc = n.get("source_location", "")
+            ntype = "ast_symbol"
+            if "func" in nid.lower() or "def " in nlabel:
+                ntype = "function"
+            elif "class" in nid.lower() or "type " in nlabel:
+                ntype = "class"
+            elif nfile.endswith(".py"):
+                ntype = "python_symbol"
+            elif nfile.endswith(".go"):
+                ntype = "go_symbol"
+
+            self.add_node(nid, nlabel, ntype, {
+                "source_file": nfile,
+                "source_location": nloc,
+                "confidence": n.get("confidence", "EXTRACTED")
+            })
+
+        for e in ast_edges:
+            self.add_edge(
+                source=e.get("source"),
+                target=e.get("target"),
+                relation=e.get("relation", "references"),
+                metadata={"confidence": e.get("confidence", "EXTRACTED")}
+            )
 
     def scan_markdown_specifications(self):
-        """Scans GOAL.md, TASKS.md, STATE.md for system architecture intent."""
+        """Scans GOAL.md, TASKS.md, STATE.md for high-level architecture intent."""
         control_dir = self.root_dir / "control-state"
         if not control_dir.exists():
             return
@@ -57,20 +142,16 @@ class GraphifyEngine:
         if goal_file.exists():
             content = goal_file.read_text(encoding="utf-8")
             self.add_node("goal:system", "System Goal (Vibe OS)", "goal", {"path": str(goal_file.relative_to(self.root_dir))})
-            
-            # Extract capabilities / core objectives
             capabilities = re.findall(r"\d+\.\s+\*\*([^*]+)\*\*:\s*([^\n]+)", content)
             for name, desc in capabilities:
                 node_id = f"capability:{name.strip().lower().replace(' ', '_')}"
                 self.add_node(node_id, f"Capability: {name.strip()}", "capability", {"description": desc.strip()})
                 self.add_edge("goal:system", node_id, "fulfills")
 
-        # 2. Parse TASKS.md (supports both Markdown tables and checkbox lists)
+        # 2. Parse TASKS.md
         tasks_file = control_dir / "TASKS.md"
         if tasks_file.exists():
             content = tasks_file.read_text(encoding="utf-8")
-            
-            # Pattern A: Table rows | TASK-001 | Description | Priority | Status |
             table_tasks = re.findall(r"\|\s*([A-Z0-9_-]+)\s*\|\s*([^|]+)\s*\|\s*([^|]+)\s*\|\s*([^|]+)\s*\|", content)
             for task_id, desc, priority, status in table_tasks:
                 if task_id.lower() in ("task id", "---"):
@@ -83,7 +164,6 @@ class GraphifyEngine:
                 })
                 self.add_edge("goal:system", t_node, "tracks")
 
-            # Pattern B: Checkbox lists - [x] TASK-001: Description
             checkbox_tasks = re.findall(r"-\s*\[([ xX])\]\s*([A-Z0-9_-]+)[:\s]+([^\n]+)", content)
             for done, task_id, desc in checkbox_tasks:
                 status = "COMPLETED" if done.lower() == "x" else "PENDING"
@@ -96,154 +176,77 @@ class GraphifyEngine:
         if state_file.exists():
             self.add_node("state:system", "System State Machine", "state", {"path": str(state_file.relative_to(self.root_dir))})
 
-    def scan_python_agent(self):
-        """Uses AST to parse Python Agent codebase (FastAPI routes, functions, cross-calls)."""
-        py_dir = self.root_dir / "agent-python"
-        if not py_dir.exists():
-            return
+    def link_services_and_tasks(self):
+        """Creates top-level service groupings and connects tasks to implementations."""
+        # Top-level services
+        service_py = "service:agent-python"
+        service_go = "service:backend-go"
+        service_fe = "service:frontend"
 
-        service_node = "service:agent-python"
-        self.add_node(service_node, "Service: Python Agent (FastAPI)", "service", {"tech": "Python / FastAPI"})
+        self.add_node(service_py, "Service: Python Agent (FastAPI)", "service", {"tech": "Python / FastAPI"})
+        self.add_node(service_go, "Service: Go WebSocket Gateway", "service", {"tech": "Go / Gorilla WebSocket"})
+        self.add_node(service_fe, "Service: Frontend Dashboard", "service", {"tech": "HTML5 / Tailwind CSS / Vanilla JS"})
 
-        for py_path in py_dir.rglob("*.py"):
-            if "venv" in py_path.parts or "__pycache__" in py_path.parts:
-                continue
-            
-            rel_path = str(py_path.relative_to(self.root_dir))
-            file_node = f"file:{rel_path}"
-            self.add_node(file_node, py_path.name, "file", {"language": "python", "path": rel_path})
-            self.add_edge(service_node, file_node, "contains")
+        # Link tasks to services
+        if "task:TASK-001" in self.nodes:
+            self.add_edge("task:TASK-001", service_go, "implemented_by")
+        if "task:TASK-002" in self.nodes:
+            self.add_edge("task:TASK-002", service_py, "implemented_by")
+        if "task:TASK-003" in self.nodes:
+            self.add_edge("task:TASK-003", service_fe, "implemented_by")
 
-            try:
-                content = py_path.read_text(encoding="utf-8")
-                tree = ast.parse(content, filename=str(py_path))
+        # Connect AST nodes to services based on file location
+        for nid, n in list(self.nodes.items()):
+            src_file = n.get("metadata", {}).get("source_file", "")
+            if src_file.startswith("agent-python"):
+                self.add_edge(service_py, nid, "contains")
+            elif src_file.startswith("backend-go"):
+                self.add_edge(service_go, nid, "contains")
+            elif src_file.startswith("frontend"):
+                self.add_edge(service_fe, nid, "contains")
 
-                for node in ast.walk(tree):
-                    # Inspect functions
-                    if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
-                        fn_node = f"py_func:{py_path.stem}.{node.name}"
-                        self.add_node(fn_node, f"def {node.name}()", "function", {"file": rel_path, "lineno": node.lineno})
-                        self.add_edge(file_node, fn_node, "declares")
-
-                        # Check for FastAPI route decorators
-                        for dec in node.decorator_list:
-                            dec_str = ast.unparse(dec) if hasattr(ast, "unparse") else ""
-                            if any(verb in dec_str for verb in [".get", ".post", ".put", ".delete", ".websocket"]):
-                                route_match = re.search(r"app\.(get|post|put|delete|websocket)\([\"']([^\"']+)[\"']", dec_str)
-                                if route_match:
-                                    method, path = route_match.groups()
-                                    ep_node = f"endpoint:python:{method.upper()}_{path}"
-                                    self.add_node(ep_node, f"{method.upper()} {path}", "endpoint", {"service": "agent-python", "path": path, "method": method.upper()})
-                                    self.add_edge(fn_node, ep_node, "routes_to")
-
-                    # Inspect calls to Go Gateway (e.g. requests.post)
-                    if isinstance(node, ast.Call):
-                        call_str = ast.unparse(node) if hasattr(ast, "unparse") else ""
-                        if "GO_GATEWAY_URL" in call_str or "agent-hook" in call_str:
-                            self.add_edge(file_node, "endpoint:go:POST_/api/agent-hook", "calls", {"protocol": "HTTP/REST"})
-
-            except Exception as e:
-                print(f"[Warning] AST parse failed for {rel_path}: {e}")
-
-    def scan_go_backend(self):
-        """Scans Go WebSocket Gateway codebase for routes, hubs, and handlers."""
-        go_dir = self.root_dir / "backend-go"
-        if not go_dir.exists():
-            return
-
-        service_node = "service:backend-go"
-        self.add_node(service_node, "Service: Go WebSocket Gateway", "service", {"tech": "Go / Gorilla WebSocket"})
-
-        # Predefine known Go endpoints
-        hook_ep = "endpoint:go:POST_/api/agent-hook"
-        self.add_node(hook_ep, "POST /api/agent-hook", "endpoint", {"service": "backend-go", "path": "/api/agent-hook", "method": "POST"})
-        self.add_edge(service_node, hook_ep, "exposes")
-
-        ws_ep = "endpoint:go:WS_/ws/client"
-        self.add_node(ws_ep, "WS /ws/client", "endpoint", {"service": "backend-go", "path": "/ws/client", "method": "WEBSOCKET"})
-        self.add_edge(service_node, ws_ep, "exposes")
-
-        health_ep = "endpoint:go:GET_/health"
-        self.add_node(health_ep, "GET /health", "endpoint", {"service": "backend-go", "path": "/health", "method": "GET"})
-        self.add_edge(service_node, health_ep, "exposes")
-
-        # Hub broadcasts to WebSocket clients
-        self.add_edge(hook_ep, ws_ep, "broadcasts_to", {"channel": "hub.broadcast"})
-
-        for go_path in go_dir.rglob("*.go"):
-            rel_path = str(go_path.relative_to(self.root_dir))
-            file_node = f"file:{rel_path}"
-            self.add_node(file_node, go_path.name, "file", {"language": "go", "path": rel_path})
-            self.add_edge(service_node, file_node, "contains")
-
-            content = go_path.read_text(encoding="utf-8")
-            # Extract struct types
-            structs = re.findall(r"type\s+([A-Za-z0-9_]+)\s+struct", content)
-            for s in structs:
-                s_node = f"go_struct:{s}"
-                self.add_node(s_node, f"type {s} struct", "struct", {"file": rel_path})
-                self.add_edge(file_node, s_node, "declares")
-
-            # Extract func declarations
-            funcs = re.findall(r"func\s+(?:\([^)]+\)\s+)?([A-Za-z0-9_]+)\s*\(", content)
-            for f in funcs:
-                f_node = f"go_func:{f}"
-                self.add_node(f_node, f"func {f}()", "function", {"file": rel_path})
-                self.add_edge(file_node, f_node, "declares")
-
-    def scan_frontend(self):
-        """Scans Frontend codebase for WebSocket subscriptions and API calls."""
-        fe_dir = self.root_dir / "frontend"
-        if not fe_dir.exists():
-            return
-
-        ui_node = "service:frontend"
-        self.add_node(ui_node, "Frontend Dashboard", "service", {"tech": "HTML5 / Tailwind CSS / Vanilla JS"})
-
-        for html_path in fe_dir.rglob("*.html"):
-            rel_path = str(html_path.relative_to(self.root_dir))
-            file_node = f"file:{rel_path}"
-            self.add_node(file_node, html_path.name, "file", {"language": "html", "path": rel_path})
-            self.add_edge(ui_node, file_node, "contains")
-
-            content = html_path.read_text(encoding="utf-8")
-            # Detect WebSocket client connection
-            if "/ws/client" in content:
-                self.add_edge(file_node, "endpoint:go:WS_/ws/client", "subscribes_to", {"protocol": "WebSocket"})
-
-            # Detect fetch calls to Python agent
-            if "/v1/state" in content:
-                self.add_edge(file_node, "endpoint:python:GET_/v1/state", "calls", {"protocol": "HTTP/REST"})
-            if "/v1/task/start" in content:
-                self.add_edge(file_node, "endpoint:python:POST_/v1/task/start", "calls", {"protocol": "HTTP/REST"})
-
-    def link_tasks_to_code(self):
-        """Connects high-level tasks to the code components that implement them."""
-        # Map TASK-001 (WebSocket Gateway)
-        if "task:TASK-001" in self.nodes and "service:backend-go" in self.nodes:
-            self.add_edge("task:TASK-001", "service:backend-go", "implemented_by")
-        
-        # Map TASK-002 (FastAPI Agent)
-        if "task:TASK-002" in self.nodes and "service:agent-python" in self.nodes:
-            self.add_edge("task:TASK-002", "service:agent-python", "implemented_by")
-
-        # Map TASK-003 (Frontend Dashboard)
-        if "task:TASK-003" in self.nodes and "service:frontend" in self.nodes:
-            self.add_edge("task:TASK-003", "service:frontend", "implemented_by")
+    def build_networkx_graph(self) -> Any:
+        """Constructs a NetworkX graph with node and edge attributes."""
+        G = nx.DiGraph()
+        for nid, n in self.nodes.items():
+            G.add_node(nid, label=n["label"], type=n["type"], **n.get("metadata", {}))
+        for e in self.edges:
+            G.add_edge(e["source"], e["target"], relation=e["relation"], **e.get("metadata", {}))
+        return G
 
     def export(self):
-        """Exports the graph in JSON, DOT, and Mermaid formats."""
+        """Exports all knowledge graph representations: JSON, DOT, Mermaid, D3 HTML, Report, Callflow."""
         self.output_dir.mkdir(parents=True, exist_ok=True)
+        G = self.build_networkx_graph()
 
-        # 1. JSON Export
+        # Run community detection and architectural analysis if Graphify core is available
+        communities = {}
+        god_nodes_list = []
+        surprising_conns = []
+
+        if GRAPHIFY_CORE_AVAILABLE:
+            try:
+                # Graphify cluster expects an undirected graph or works on G.to_undirected()
+                undirected_G = G.to_undirected()
+                communities = cluster(undirected_G)
+                god_nodes_list = god_nodes(undirected_G)
+                surprising_conns = surprising_connections(undirected_G)
+            except Exception as e:
+                print(f"[Warning] Graph analysis failed: {e}")
+
+        # 1. JSON Export (Structured with Summary & Metadata)
         graph_data = {
-            "version": "1.0.0",
-            "generator": "Graphify-vibe-os",
+            "version": "2.0.0",
+            "generator": "Graphify-vibe-os-v8",
             "summary": {
                 "nodes_count": len(self.nodes),
                 "edges_count": len(self.edges),
+                "communities_count": len(communities),
+                "god_nodes_count": len(god_nodes_list),
                 "services": [n["label"] for n in self.nodes.values() if n["type"] == "service"]
             },
+            "communities": communities,
+            "god_nodes": [gn[0] if isinstance(gn, tuple) else gn for gn in god_nodes_list[:10]],
             "nodes": list(self.nodes.values()),
             "edges": self.edges
         }
@@ -251,14 +254,15 @@ class GraphifyEngine:
         with open(json_path, "w", encoding="utf-8") as f:
             json.dump(graph_data, f, indent=2, ensure_ascii=False)
 
-        # 2. DOT (Graphviz) Export
+        # 2. Graphviz DOT Export
         dot_path = self.output_dir / "knowledge_graph.dot"
         with open(dot_path, "w", encoding="utf-8") as f:
             f.write("digraph VibeOSKnowledgeGraph {\n")
             f.write('  rankdir=LR;\n  node [shape=box, fontname="Helvetica"];\n  edge [fontname="Helvetica", fontsize=10];\n\n')
             for n in self.nodes.values():
                 safe_id = re.sub(r"[^a-zA-Z0-9_]", "_", n["id"])
-                f.write(f'  {safe_id} [label="{n["label"]}", type="{n["type"]}"];\n')
+                clean_label = n["label"].replace('"', '\\"')
+                f.write(f'  {safe_id} [label="{clean_label}", type="{n["type"]}"];\n')
             f.write("\n")
             for e in self.edges:
                 s_id = re.sub(r"[^a-zA-Z0-9_]", "_", e["source"])
@@ -279,23 +283,71 @@ class GraphifyEngine:
                 t_id = re.sub(r"[^a-zA-Z0-9_]", "_", e["target"])
                 f.write(f'    {s_id} -->|{e["relation"]}| {t_id}\n')
 
-        print(f"[Graphify] Generated Knowledge Graph successfully:")
-        print(f"  - Nodes: {len(self.nodes)}")
-        print(f"  - Edges: {len(self.edges)}")
-        print(f"  - JSON:    {json_path}")
-        print(f"  - DOT:     {dot_path}")
-        print(f"  - Mermaid: {mermaid_path}")
+        # 4. Interactive D3 HTML & Report via Graphify core
+        html_path = self.output_dir / "graph.html"
+        report_path = self.output_dir / "GRAPH_REPORT.md"
+        callflow_path = self.output_dir / "callflow.html"
+
+        if GRAPHIFY_CORE_AVAILABLE:
+            try:
+                # D3 HTML Visualizer
+                to_html(undirected_G, communities, str(html_path))
+                print(f"  - HTML:    {html_path}")
+            except Exception as e:
+                print(f"[Warning] Failed to generate D3 HTML: {e}")
+
+            try:
+                # Markdown Report
+                rep_content = f"# Vibe OS Architecture Knowledge Graph Report\n\n"
+                rep_content += f"- **Total Nodes**: {len(self.nodes)}\n"
+                rep_content += f"- **Total Edges**: {len(self.edges)}\n"
+                rep_content += f"- **Detected Communities**: {len(communities)}\n\n"
+                rep_content += "## God Nodes (High Centrality Symbols)\n\n"
+                for gn in god_nodes_list[:15]:
+                    name = gn[0] if isinstance(gn, tuple) else gn
+                    deg = gn[1] if isinstance(gn, tuple) and len(gn) > 1 else "N/A"
+                    rep_content += f"- `{name}` (degree: {deg})\n"
+                rep_content += "\n## Communities\n\n"
+                for cid, cnodes in list(communities.items())[:10]:
+                    rep_content += f"### Community {cid} ({len(cnodes)} nodes)\n"
+                    for cn in cnodes[:8]:
+                        rep_content += f"- `{cn}`\n"
+                    if len(cnodes) > 8:
+                        rep_content += f"- ... and {len(cnodes) - 8} more\n"
+                with open(report_path, "w", encoding="utf-8") as f:
+                    f.write(rep_content)
+                print(f"  - Report:  {report_path}")
+            except Exception as e:
+                print(f"[Warning] Failed to generate Report: {e}")
+
+            try:
+                # Mermaid Call-Flow HTML
+                write_callflow_html(
+                    graph=json_path,
+                    report=report_path,
+                    output=callflow_path,
+                    lang="zh-CN"
+                )
+                print(f"  - Callflow:{callflow_path}")
+            except Exception as e:
+                print(f"[Warning] Callflow generation info: {e}")
+
+        print("\n==================================================")
+        print("   ✅ Vibe OS Graphify Engine Completed!")
+        print(f"   - Nodes: {len(self.nodes)}")
+        print(f"   - Edges: {len(self.edges)}")
+        print(f"   - Communities: {len(communities)}")
+        print(f"   - Artifacts stored in: {self.output_dir}")
+        print("==================================================")
 
 
 def main():
     root = Path(__file__).resolve().parent.parent
     out = root / "knowledge-graph"
-    engine = GraphifyEngine(root_dir=root, output_dir=out)
+    engine = UpgradedVibeGraphifyEngine(root_dir=root, output_dir=out)
+    engine.scan_codebase_ast()
     engine.scan_markdown_specifications()
-    engine.scan_python_agent()
-    engine.scan_go_backend()
-    engine.scan_frontend()
-    engine.link_tasks_to_code()
+    engine.link_services_and_tasks()
     engine.export()
 
 

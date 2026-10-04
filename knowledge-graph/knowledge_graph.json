@@ -1,0 +1,4001 @@
+{
+  "version": "2.0.0",
+  "generator": "Graphify-vibe-os-v8",
+  "summary": {
+    "nodes_count": 155,
+    "edges_count": 285,
+    "communities_count": 17,
+    "god_nodes_count": 10,
+    "services": [
+      "Service: Python Agent (FastAPI)",
+      "Service: Go WebSocket Gateway",
+      "Service: Frontend Dashboard"
+    ]
+  },
+  "communities": {
+    "0": [
+      "agent_python_main",
+      "agent_python_main_agenttracerequest",
+      "agent_python_main_approvalrequest",
+      "agent_python_main_approve_waterfall_gate",
+      "agent_python_main_broadcast_agent_status",
+      "agent_python_main_broadcast_agent_trace",
+      "agent_python_main_call_mcp_tool",
+      "agent_python_main_forward_agent_trace",
+      "agent_python_main_get_current_state",
+      "agent_python_main_get_mcp_tools",
+      "agent_python_main_graph_query",
+      "agent_python_main_graphqueryrequest",
+      "agent_python_main_mcpcallrequest",
+      "agent_python_main_mock_agent_execution_loop",
+      "agent_python_main_py_any",
+      "agent_python_main_py_path",
+      "agent_python_main_rationale_100",
+      "agent_python_main_rationale_193",
+      "agent_python_main_rationale_209",
+      "agent_python_main_rationale_236",
+      "agent_python_main_rationale_276",
+      "agent_python_main_rationale_283",
+      "agent_python_main_rationale_295",
+      "agent_python_main_rationale_323",
+      "agent_python_main_rationale_71",
+      "agent_python_main_rationale_86",
+      "agent_python_main_rationale_92",
+      "agent_python_main_read_root",
+      "agent_python_main_start_task",
+      "agent_python_main_taskstartrequest",
+      "agent_python_main_update_file_content",
+      "asyncio",
+      "backgroundtasks",
+      "basemodel",
+      "datetime",
+      "fastapi",
+      "fastapi_middleware_cors",
+      "get",
+      "post",
+      "pydantic",
+      "requests",
+      "service:agent-python",
+      "uvicorn"
+    ],
+    "1": [
+      "agent_python_graph_service",
+      "agent_python_graph_service_rationale_1",
+      "ast",
+      "graph_service",
+      "graphify_analyze",
+      "graphify_build",
+      "graphify_callflow_html",
+      "graphify_cluster",
+      "graphify_export",
+      "graphify_extract",
+      "graphify_report",
+      "json",
+      "networkx",
+      "os",
+      "pathlib",
+      "re",
+      "scripts_graphify_engine",
+      "scripts_graphify_engine_main",
+      "scripts_graphify_engine_rationale_2",
+      "subprocess",
+      "sys",
+      "tests_e2e_telemetry_test",
+      "tests_e2e_telemetry_test_rationale_1",
+      "tests_test_graphify_integration",
+      "tests_test_graphify_integration_rationale_1",
+      "typing",
+      "unittest"
+    ],
+    "2": [
+      "agent_python_graph_service_ensure_graph_exists",
+      "agent_python_graph_service_find_matching_nodes",
+      "agent_python_graph_service_py_any",
+      "agent_python_graph_service_query_code_graph",
+      "agent_python_graph_service_rationale_22",
+      "agent_python_graph_service_rationale_38",
+      "agent_python_graph_service_rationale_50",
+      "tests_test_graphify_integration_rationale_25",
+      "tests_test_graphify_integration_rationale_45",
+      "tests_test_graphify_integration_rationale_59",
+      "tests_test_graphify_integration_rationale_68",
+      "tests_test_graphify_integration_rationale_76",
+      "tests_test_graphify_integration_rationale_84",
+      "tests_test_graphify_integration_testgraphifyintegration",
+      "tests_test_graphify_integration_testgraphifyintegration_setupclass",
+      "tests_test_graphify_integration_testgraphifyintegration_test_dot_and_mermaid_artifacts",
+      "tests_test_graphify_integration_testgraphifyintegration_test_knowledge_graph_json_structure",
+      "tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_dependencies",
+      "tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_impact_analysis",
+      "tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_overview",
+      "tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_task_mapping"
+    ],
+    "3": [
+      "backend_go_agentstatuspayload",
+      "backend_go_hub",
+      "backend_go_hub_run",
+      "backend_go_main",
+      "backend_go_main_enablecors",
+      "backend_go_main_main",
+      "backend_go_main_newhub",
+      "go_pkg_encoding_json",
+      "go_pkg_fmt",
+      "go_pkg_github_com_gorilla_websocket",
+      "go_pkg_io",
+      "go_pkg_log",
+      "go_pkg_net_http",
+      "go_pkg_sync",
+      "go_pkg_time",
+      "go_type_github_com_gorilla_websocket_conn",
+      "go_type_net_http_responsewriter",
+      "go_type_sync_rwmutex",
+      "service:backend-go"
+    ],
+    "4": [
+      "scripts_graphify_engine_py_any",
+      "scripts_graphify_engine_py_path",
+      "scripts_graphify_engine_rationale_135",
+      "scripts_graphify_engine_rationale_180",
+      "scripts_graphify_engine_rationale_209",
+      "scripts_graphify_engine_rationale_218",
+      "scripts_graphify_engine_rationale_82",
+      "scripts_graphify_engine_upgradedvibegraphifyengine",
+      "scripts_graphify_engine_upgradedvibegraphifyengine_add_edge",
+      "scripts_graphify_engine_upgradedvibegraphifyengine_add_node",
+      "scripts_graphify_engine_upgradedvibegraphifyengine_build_networkx_graph",
+      "scripts_graphify_engine_upgradedvibegraphifyengine_export",
+      "scripts_graphify_engine_upgradedvibegraphifyengine_init",
+      "scripts_graphify_engine_upgradedvibegraphifyengine_link_services_and_tasks",
+      "scripts_graphify_engine_upgradedvibegraphifyengine_scan_codebase_ast",
+      "scripts_graphify_engine_upgradedvibegraphifyengine_scan_markdown_specifications"
+    ],
+    "5": [
+      "reports_graphify_integration_report",
+      "reports_graphify_integration_report_1_graphify_初始化腳本與掃描引擎",
+      "reports_graphify_integration_report_1_單元與整合測試",
+      "reports_graphify_integration_report_2_python_agent_擴充與_mcp_知識查詢邏輯",
+      "reports_graphify_integration_report_2_後端編譯驗證",
+      "reports_graphify_integration_report_3_ci_cd_自癒流程與安全審批門禁",
+      "reports_graphify_integration_report_graphify_本地知識圖譜整合與_aiops_自癒工作流架構報告",
+      "reports_graphify_integration_report_交付成果清單_deliverables",
+      "reports_graphify_integration_report_執行摘要_executive_summary",
+      "reports_graphify_integration_report_後續步驟",
+      "reports_graphify_integration_report_測試與驗證數據_verification_test_results",
+      "reports_graphify_integration_report_資安與治理規則合規說明_security_governance_compliance"
+    ],
+    "6": [
+      "capability:markdown-driven_source_of_truth",
+      "capability:real-time_log_streaming",
+      "capability:state_machine_governance",
+      "goal:system",
+      "service:frontend",
+      "task:TASK-001",
+      "task:TASK-002",
+      "task:TASK-003",
+      "task:TASK-004"
+    ],
+    "7": [
+      "readme_setup",
+      "readme_setup_directory_overview",
+      "readme_setup_interactive_workflow_verification",
+      "readme_setup_quick_start_guide",
+      "readme_setup_security_environment_integrity",
+      "readme_setup_step_1_start_the_go_websocket_gateway_backend_go",
+      "readme_setup_step_2_start_the_python_agent_backend_agent_python",
+      "readme_setup_step_3_launch_the_frontend_control_dashboard_frontend",
+      "readme_setup_vibe_os_visualized_agile_waterfall_hybrid_development_system"
+    ],
+    "8": [
+      "tests_e2e_telemetry_test_rationale_17",
+      "tests_e2e_telemetry_test_rationale_26",
+      "tests_e2e_telemetry_test_rationale_36",
+      "tests_e2e_telemetry_test_testvibeoscontrolstate",
+      "tests_e2e_telemetry_test_testvibeoscontrolstate_setup",
+      "tests_e2e_telemetry_test_testvibeoscontrolstate_test_gate_transition_validity",
+      "tests_e2e_telemetry_test_testvibeoscontrolstate_test_handoff_log_integrity",
+      "tests_e2e_telemetry_test_testvibeoscontrolstate_test_state_file_exists"
+    ],
+    "9": [
+      "control_state_handoff",
+      "control_state_handoff_agent_handoff_log",
+      "control_state_handoff_handoff_record_2026_09_21t05_14_21_292282z",
+      "control_state_handoff_handoff_record_2026_09_21t11_42_29_295052z",
+      "control_state_handoff_initial_handoff_template"
+    ],
+    "10": [
+      "control_state_decisions",
+      "control_state_decisions_decision_record_2026_09_21t05_15_00_893509z",
+      "control_state_decisions_human_waterfall_decisions_log",
+      "control_state_decisions_initial_log"
+    ],
+    "11": [
+      "control_state_goal",
+      "control_state_goal_core_capabilities",
+      "control_state_goal_objective",
+      "control_state_goal_system_goal_vibe_coding_hybrid_agile_waterfall_development_os_vibe_os"
+    ],
+    "12": [
+      "control_state_tasks",
+      "control_state_tasks_agile_backlog_tasks",
+      "control_state_tasks_sprint_1"
+    ],
+    "13": [
+      "start",
+      "start_cleanup",
+      "start_sh__entry"
+    ],
+    "14": [
+      "control_state_state",
+      "control_state_state_current_system_state"
+    ],
+    "15": [
+      "scripts_init_graphify",
+      "scripts_init_graphify_sh__entry"
+    ],
+    "16": [
+      "state:system"
+    ]
+  },
+  "god_nodes": [
+    {
+      "id": "agent_python_graph_service_query_code_graph",
+      "label": "query_code_graph()",
+      "degree": 15
+    },
+    {
+      "id": "scripts_graphify_engine_upgradedvibegraphifyengine",
+      "label": "UpgradedVibeGraphifyEngine",
+      "degree": 10
+    },
+    {
+      "id": "agent_python_main_mock_agent_execution_loop",
+      "label": "mock_agent_execution_loop()",
+      "degree": 9
+    },
+    {
+      "id": "agent_python_main_start_task",
+      "label": "start_task()",
+      "degree": 8
+    },
+    {
+      "id": "tests_test_graphify_integration_testgraphifyintegration",
+      "label": "TestGraphifyIntegration",
+      "degree": 8
+    },
+    {
+      "id": "agent_python_main_broadcast_agent_trace",
+      "label": "broadcast_agent_trace()",
+      "degree": 7
+    },
+    {
+      "id": "agent_python_main_update_file_content",
+      "label": "update_file_content()",
+      "degree": 7
+    },
+    {
+      "id": "agent_python_main_approve_waterfall_gate",
+      "label": "approve_waterfall_gate()",
+      "degree": 7
+    },
+    {
+      "id": "backend_go_hub",
+      "label": "Hub",
+      "degree": 7
+    },
+    {
+      "id": "agent_python_graph_service_ensure_graph_exists",
+      "label": "ensure_graph_exists()",
+      "degree": 6
+    }
+  ],
+  "nodes": [
+    {
+      "id": "readme_setup",
+      "label": "README_SETUP.md",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "README_SETUP.md",
+        "source_location": "L1",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "readme_setup_vibe_os_visualized_agile_waterfall_hybrid_development_system",
+      "label": "Vibe OS: Visualized Agile/Waterfall Hybrid Development System",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "README_SETUP.md",
+        "source_location": "L1",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "readme_setup_directory_overview",
+      "label": "Directory Overview",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "README_SETUP.md",
+        "source_location": "L7",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "readme_setup_quick_start_guide",
+      "label": "Quick Start Guide",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "README_SETUP.md",
+        "source_location": "L30",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "readme_setup_step_1_start_the_go_websocket_gateway_backend_go",
+      "label": "Step 1: Start the Go WebSocket Gateway (`backend-go`)",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "README_SETUP.md",
+        "source_location": "L32",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "readme_setup_step_2_start_the_python_agent_backend_agent_python",
+      "label": "Step 2: Start the Python Agent Backend (`agent-python`)",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "README_SETUP.md",
+        "source_location": "L47",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "readme_setup_step_3_launch_the_frontend_control_dashboard_frontend",
+      "label": "Step 3: Launch the Frontend Control Dashboard (`frontend`)",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "README_SETUP.md",
+        "source_location": "L71",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "readme_setup_interactive_workflow_verification",
+      "label": "Interactive Workflow Verification",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "README_SETUP.md",
+        "source_location": "L86",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "readme_setup_security_environment_integrity",
+      "label": "Security & Environment Integrity",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "README_SETUP.md",
+        "source_location": "L103",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_graph_service",
+      "label": "graph_service.py",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/graph_service.py",
+        "source_location": "L1",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_graph_service_ensure_graph_exists",
+      "label": "ensure_graph_exists()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/graph_service.py",
+        "source_location": "L21",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_graph_service_py_any",
+      "label": "Any",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "",
+        "source_location": "",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_graph_service_find_matching_nodes",
+      "label": "find_matching_nodes()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/graph_service.py",
+        "source_location": "L37",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_graph_service_query_code_graph",
+      "label": "query_code_graph()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/graph_service.py",
+        "source_location": "L49",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_graph_service_rationale_1",
+      "label": "Graph Service for Vibe OS Agent =============================== Provides local…",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/graph_service.py",
+        "source_location": "L1",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_graph_service_rationale_22",
+      "label": "Loads knowledge_graph.json, generating it via graphify_engine.py if missing.",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/graph_service.py",
+        "source_location": "L22",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_graph_service_rationale_38",
+      "label": "Fuzzy searches nodes by id or label.",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/graph_service.py",
+        "source_location": "L38",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_graph_service_rationale_50",
+      "label": "Queries Graphify knowledge graph to inspect code dependencies, architecture…",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/graph_service.py",
+        "source_location": "L50",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_main",
+      "label": "main.py",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/main.py",
+        "source_location": "L1",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_main_taskstartrequest",
+      "label": "TaskStartRequest",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/main.py",
+        "source_location": "L41",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "basemodel",
+      "label": "BaseModel",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "",
+        "source_location": "",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_main_approvalrequest",
+      "label": "ApprovalRequest",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/main.py",
+        "source_location": "L47",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_main_graphqueryrequest",
+      "label": "GraphQueryRequest",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/main.py",
+        "source_location": "L53",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_main_agenttracerequest",
+      "label": "AgentTraceRequest",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/main.py",
+        "source_location": "L58",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_main_mcpcallrequest",
+      "label": "MCPCallRequest",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/main.py",
+        "source_location": "L65",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_main_broadcast_agent_status",
+      "label": "broadcast_agent_status()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/main.py",
+        "source_location": "L70",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_main_broadcast_agent_trace",
+      "label": "broadcast_agent_trace()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/main.py",
+        "source_location": "L85",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_main_py_any",
+      "label": "Any",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "",
+        "source_location": "",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_main_update_file_content",
+      "label": "update_file_content()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/main.py",
+        "source_location": "L91",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_main_py_path",
+      "label": "Path",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "",
+        "source_location": "",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_main_mock_agent_execution_loop",
+      "label": "mock_agent_execution_loop()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/main.py",
+        "source_location": "L99",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "get",
+      "label": "get",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "",
+        "source_location": "",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_main_read_root",
+      "label": "read_root()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/main.py",
+        "source_location": "L182",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_main_get_current_state",
+      "label": "get_current_state()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/main.py",
+        "source_location": "L192",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "post",
+      "label": "post",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "",
+        "source_location": "",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_main_start_task",
+      "label": "start_task()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/main.py",
+        "source_location": "L208",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "backgroundtasks",
+      "label": "BackgroundTasks",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "",
+        "source_location": "",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_main_approve_waterfall_gate",
+      "label": "approve_waterfall_gate()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/main.py",
+        "source_location": "L235",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_main_graph_query",
+      "label": "graph_query()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/main.py",
+        "source_location": "L275",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_main_forward_agent_trace",
+      "label": "forward_agent_trace()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/main.py",
+        "source_location": "L282",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_main_get_mcp_tools",
+      "label": "get_mcp_tools()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/main.py",
+        "source_location": "L294",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_main_call_mcp_tool",
+      "label": "call_mcp_tool()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/main.py",
+        "source_location": "L322",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_main_rationale_71",
+      "label": "Sends log payloads to Go WebSocket gateway for real-time frontend streaming.",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/main.py",
+        "source_location": "L71",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_main_rationale_86",
+      "label": "Broadcasts detailed agent thinking path and knowledge graph reasoning to Go…",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/main.py",
+        "source_location": "L86",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_main_rationale_92",
+      "label": "Safely reads/writes content to control-state markdown files.",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/main.py",
+        "source_location": "L92",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_main_rationale_100",
+      "label": "Vibe Coding agent execution loop integrated with Graphify Knowledge Graph.…",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/main.py",
+        "source_location": "L100",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_main_rationale_193",
+      "label": "Returns the current state from control-state files.",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/main.py",
+        "source_location": "L193",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_main_rationale_209",
+      "label": "Endpoint to launch a new Vibe Coding agent task execution loop.",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/main.py",
+        "source_location": "L209",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_main_rationale_236",
+      "label": "Endpoint for human sign-off approving the waterfall gate.",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/main.py",
+        "source_location": "L236",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_main_rationale_276",
+      "label": "REST endpoint for querying Graphify code knowledge graph.",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/main.py",
+        "source_location": "L276",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_main_rationale_283",
+      "label": "Forwards an agent's reasoning/thinking trace directly to the Go WebSocket…",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/main.py",
+        "source_location": "L283",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_main_rationale_295",
+      "label": "Returns standard MCP tool definitions available in Vibe OS.",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/main.py",
+        "source_location": "L295",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "agent_python_main_rationale_323",
+      "label": "Executes an MCP tool call (query_code_graph) and returns standardized content.",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "agent-python/main.py",
+        "source_location": "L323",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "backend_go_main",
+      "label": "main.go",
+      "type": "go_symbol",
+      "metadata": {
+        "source_file": "backend-go/main.go",
+        "source_location": "L1",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "backend_go_agentstatuspayload",
+      "label": "AgentStatusPayload",
+      "type": "go_symbol",
+      "metadata": {
+        "source_file": "backend-go/main.go",
+        "source_location": "L23",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "backend_go_hub",
+      "label": "Hub",
+      "type": "go_symbol",
+      "metadata": {
+        "source_file": "backend-go/main.go",
+        "source_location": "L31",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "backend_go_main_newhub",
+      "label": "newHub()",
+      "type": "go_symbol",
+      "metadata": {
+        "source_file": "backend-go/main.go",
+        "source_location": "L39",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "backend_go_hub_run",
+      "label": ".run()",
+      "type": "go_symbol",
+      "metadata": {
+        "source_file": "backend-go/main.go",
+        "source_location": "L48",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "backend_go_main_enablecors",
+      "label": "enableCORS()",
+      "type": "go_symbol",
+      "metadata": {
+        "source_file": "backend-go/main.go",
+        "source_location": "L125",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "backend_go_main_main",
+      "label": "main()",
+      "type": "go_symbol",
+      "metadata": {
+        "source_file": "backend-go/main.go",
+        "source_location": "L131",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "control_state_decisions",
+      "label": "DECISIONS.md",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "control-state/DECISIONS.md",
+        "source_location": "L1",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "control_state_decisions_human_waterfall_decisions_log",
+      "label": "Human Waterfall Decisions Log",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "control-state/DECISIONS.md",
+        "source_location": "L1",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "control_state_decisions_initial_log",
+      "label": "[Initial Log]",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "control-state/DECISIONS.md",
+        "source_location": "L7",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "control_state_decisions_decision_record_2026_09_21t05_15_00_893509z",
+      "label": "Decision Record - 2026-09-21T05:15:00.893509Z",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "control-state/DECISIONS.md",
+        "source_location": "L16",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "control_state_goal",
+      "label": "GOAL.md",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "control-state/GOAL.md",
+        "source_location": "L1",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "control_state_goal_system_goal_vibe_coding_hybrid_agile_waterfall_development_os_vibe_os",
+      "label": "System Goal: Vibe Coding & Hybrid Agile/Waterfall Development OS (vibe-os)",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "control-state/GOAL.md",
+        "source_location": "L1",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "control_state_goal_objective",
+      "label": "Objective",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "control-state/GOAL.md",
+        "source_location": "L3",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "control_state_goal_core_capabilities",
+      "label": "Core Capabilities",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "control-state/GOAL.md",
+        "source_location": "L7",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "control_state_handoff",
+      "label": "HANDOFF.md",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "control-state/HANDOFF.md",
+        "source_location": "L1",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "control_state_handoff_agent_handoff_log",
+      "label": "Agent Handoff Log",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "control-state/HANDOFF.md",
+        "source_location": "L1",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "control_state_handoff_initial_handoff_template",
+      "label": "[Initial Handoff Template]",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "control-state/HANDOFF.md",
+        "source_location": "L7",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "control_state_handoff_handoff_record_2026_09_21t05_14_21_292282z",
+      "label": "Handoff Record - 2026-09-21T05:14:21.292282Z",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "control-state/HANDOFF.md",
+        "source_location": "L17",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "control_state_handoff_handoff_record_2026_09_21t11_42_29_295052z",
+      "label": "Handoff Record - 2026-09-21T11:42:29.295052Z",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "control-state/HANDOFF.md",
+        "source_location": "L32",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "control_state_state",
+      "label": "STATE.md",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "control-state/STATE.md",
+        "source_location": "L1",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "control_state_state_current_system_state",
+      "label": "Current System State",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "control-state/STATE.md",
+        "source_location": "L1",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "control_state_tasks",
+      "label": "TASKS.md",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "control-state/TASKS.md",
+        "source_location": "L1",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "control_state_tasks_agile_backlog_tasks",
+      "label": "Agile Backlog (TASKS)",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "control-state/TASKS.md",
+        "source_location": "L1",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "control_state_tasks_sprint_1",
+      "label": "Sprint 1",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "control-state/TASKS.md",
+        "source_location": "L3",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "reports_graphify_integration_report",
+      "label": "graphify-integration-report.md",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "reports/graphify-integration-report.md",
+        "source_location": "L1",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "reports_graphify_integration_report_graphify_本地知識圖譜整合與_aiops_自癒工作流架構報告",
+      "label": "Graphify 本地知識圖譜整合與 AIOps 自癒工作流架構報告",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "reports/graphify-integration-report.md",
+        "source_location": "L1",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "reports_graphify_integration_report_執行摘要_executive_summary",
+      "label": "執行摘要 (Executive Summary)",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "reports/graphify-integration-report.md",
+        "source_location": "L10",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "reports_graphify_integration_report_交付成果清單_deliverables",
+      "label": "交付成果清單 (Deliverables)",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "reports/graphify-integration-report.md",
+        "source_location": "L16",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "reports_graphify_integration_report_1_graphify_初始化腳本與掃描引擎",
+      "label": "1. Graphify 初始化腳本與掃描引擎",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "reports/graphify-integration-report.md",
+        "source_location": "L18",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "reports_graphify_integration_report_2_python_agent_擴充與_mcp_知識查詢邏輯",
+      "label": "2. Python Agent 擴充與 MCP 知識查詢邏輯",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "reports/graphify-integration-report.md",
+        "source_location": "L34",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "reports_graphify_integration_report_3_ci_cd_自癒流程與安全審批門禁",
+      "label": "3. CI/CD 自癒流程與安全審批門禁",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "reports/graphify-integration-report.md",
+        "source_location": "L54",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "reports_graphify_integration_report_資安與治理規則合規說明_security_governance_compliance",
+      "label": "資安與治理規則合規說明 (Security & Governance Compliance)",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "reports/graphify-integration-report.md",
+        "source_location": "L71",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "reports_graphify_integration_report_測試與驗證數據_verification_test_results",
+      "label": "測試與驗證數據 (Verification & Test Results)",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "reports/graphify-integration-report.md",
+        "source_location": "L81",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "reports_graphify_integration_report_1_單元與整合測試",
+      "label": "1. 單元與整合測試",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "reports/graphify-integration-report.md",
+        "source_location": "L83",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "reports_graphify_integration_report_2_後端編譯驗證",
+      "label": "2. 後端編譯驗證",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "reports/graphify-integration-report.md",
+        "source_location": "L100",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "reports_graphify_integration_report_後續步驟",
+      "label": "後續步驟",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "reports/graphify-integration-report.md",
+        "source_location": "L108",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "scripts_graphify_engine",
+      "label": "graphify_engine.py",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "scripts/graphify_engine.py",
+        "source_location": "L1",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "scripts_graphify_engine_upgradedvibegraphifyengine",
+      "label": "UpgradedVibeGraphifyEngine",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "scripts/graphify_engine.py",
+        "source_location": "L50",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "scripts_graphify_engine_upgradedvibegraphifyengine_init",
+      "label": ".__init__()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "scripts/graphify_engine.py",
+        "source_location": "L51",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "scripts_graphify_engine_py_path",
+      "label": "Path",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "",
+        "source_location": "",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "scripts_graphify_engine_upgradedvibegraphifyengine_add_node",
+      "label": ".add_node()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "scripts/graphify_engine.py",
+        "source_location": "L57",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "scripts_graphify_engine_py_any",
+      "label": "Any",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "",
+        "source_location": "",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "scripts_graphify_engine_upgradedvibegraphifyengine_add_edge",
+      "label": ".add_edge()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "scripts/graphify_engine.py",
+        "source_location": "L69",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "scripts_graphify_engine_upgradedvibegraphifyengine_scan_codebase_ast",
+      "label": ".scan_codebase_ast()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "scripts/graphify_engine.py",
+        "source_location": "L81",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "scripts_graphify_engine_upgradedvibegraphifyengine_scan_markdown_specifications",
+      "label": ".scan_markdown_specifications()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "scripts/graphify_engine.py",
+        "source_location": "L134",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "scripts_graphify_engine_upgradedvibegraphifyengine_link_services_and_tasks",
+      "label": ".link_services_and_tasks()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "scripts/graphify_engine.py",
+        "source_location": "L179",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "scripts_graphify_engine_upgradedvibegraphifyengine_build_networkx_graph",
+      "label": ".build_networkx_graph()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "scripts/graphify_engine.py",
+        "source_location": "L208",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "scripts_graphify_engine_upgradedvibegraphifyengine_export",
+      "label": ".export()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "scripts/graphify_engine.py",
+        "source_location": "L217",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "scripts_graphify_engine_main",
+      "label": "main()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "scripts/graphify_engine.py",
+        "source_location": "L344",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "scripts_graphify_engine_rationale_2",
+      "label": "Upgraded Graphify Engine for Vibe OS =====================================…",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "scripts/graphify_engine.py",
+        "source_location": "L2",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "scripts_graphify_engine_rationale_82",
+      "label": "Uses Graphify Tree-sitter parsers to extract all AST nodes and edges across…",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "scripts/graphify_engine.py",
+        "source_location": "L82",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "scripts_graphify_engine_rationale_135",
+      "label": "Scans GOAL.md, TASKS.md, STATE.md for high-level architecture intent.",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "scripts/graphify_engine.py",
+        "source_location": "L135",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "scripts_graphify_engine_rationale_180",
+      "label": "Creates top-level service groupings and connects tasks to implementations.",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "scripts/graphify_engine.py",
+        "source_location": "L180",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "scripts_graphify_engine_rationale_209",
+      "label": "Constructs a NetworkX graph with node and edge attributes.",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "scripts/graphify_engine.py",
+        "source_location": "L209",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "scripts_graphify_engine_rationale_218",
+      "label": "Exports all knowledge graph representations: JSON, DOT, Mermaid, D3 HTML,…",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "scripts/graphify_engine.py",
+        "source_location": "L218",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "scripts_init_graphify",
+      "label": "init_graphify.sh",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "scripts/init_graphify.sh",
+        "source_location": "L1",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "scripts_init_graphify_sh__entry",
+      "label": "init_graphify.sh script",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "scripts/init_graphify.sh",
+        "source_location": "L1",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "start",
+      "label": "start.sh",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "start.sh",
+        "source_location": "L1",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "start_sh__entry",
+      "label": "start.sh script",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "start.sh",
+        "source_location": "L1",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "start_cleanup",
+      "label": "cleanup()",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "start.sh",
+        "source_location": "L15",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "tests_e2e_telemetry_test",
+      "label": "e2e_telemetry_test.py",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "tests/e2e_telemetry_test.py",
+        "source_location": "L1",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "tests_e2e_telemetry_test_testvibeoscontrolstate",
+      "label": "TestVibeOSControlState",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "tests/e2e_telemetry_test.py",
+        "source_location": "L10",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "tests_e2e_telemetry_test_testvibeoscontrolstate_setup",
+      "label": ".setUp()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "tests/e2e_telemetry_test.py",
+        "source_location": "L11",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "tests_e2e_telemetry_test_testvibeoscontrolstate_test_state_file_exists",
+      "label": ".test_state_file_exists()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "tests/e2e_telemetry_test.py",
+        "source_location": "L16",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "tests_e2e_telemetry_test_testvibeoscontrolstate_test_gate_transition_validity",
+      "label": ".test_gate_transition_validity()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "tests/e2e_telemetry_test.py",
+        "source_location": "L25",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "tests_e2e_telemetry_test_testvibeoscontrolstate_test_handoff_log_integrity",
+      "label": ".test_handoff_log_integrity()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "tests/e2e_telemetry_test.py",
+        "source_location": "L35",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "tests_e2e_telemetry_test_rationale_1",
+      "label": "E2E Telemetry & State Gate Verification Test Suite for Vibe OS Verifies…",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "tests/e2e_telemetry_test.py",
+        "source_location": "L1",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "tests_e2e_telemetry_test_rationale_17",
+      "label": "Verify STATE.md exists and is readable.",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "tests/e2e_telemetry_test.py",
+        "source_location": "L17",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "tests_e2e_telemetry_test_rationale_26",
+      "label": "Verify Waterfall Gate is in a valid state (PASSED, PENDING_APPROVAL, or ACTIVE).",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "tests/e2e_telemetry_test.py",
+        "source_location": "L26",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "tests_e2e_telemetry_test_rationale_36",
+      "label": "Verify HANDOFF.md contains valid handoff records with sign-off details.",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "tests/e2e_telemetry_test.py",
+        "source_location": "L36",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "tests_test_graphify_integration",
+      "label": "test_graphify_integration.py",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "tests/test_graphify_integration.py",
+        "source_location": "L1",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "tests_test_graphify_integration_testgraphifyintegration",
+      "label": "TestGraphifyIntegration",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "tests/test_graphify_integration.py",
+        "source_location": "L18",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "tests_test_graphify_integration_testgraphifyintegration_setupclass",
+      "label": ".setUpClass()",
+      "type": "class",
+      "metadata": {
+        "source_file": "tests/test_graphify_integration.py",
+        "source_location": "L20",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "tests_test_graphify_integration_testgraphifyintegration_test_knowledge_graph_json_structure",
+      "label": ".test_knowledge_graph_json_structure()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "tests/test_graphify_integration.py",
+        "source_location": "L24",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "tests_test_graphify_integration_testgraphifyintegration_test_dot_and_mermaid_artifacts",
+      "label": ".test_dot_and_mermaid_artifacts()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "tests/test_graphify_integration.py",
+        "source_location": "L44",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_overview",
+      "label": ".test_query_code_graph_overview()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "tests/test_graphify_integration.py",
+        "source_location": "L58",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_dependencies",
+      "label": ".test_query_code_graph_dependencies()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "tests/test_graphify_integration.py",
+        "source_location": "L67",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_impact_analysis",
+      "label": ".test_query_code_graph_impact_analysis()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "tests/test_graphify_integration.py",
+        "source_location": "L75",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_task_mapping",
+      "label": ".test_query_code_graph_task_mapping()",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "tests/test_graphify_integration.py",
+        "source_location": "L83",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "tests_test_graphify_integration_rationale_1",
+      "label": "Test Suite for Graphify Integration & MCP Code Graph Querying in Vibe OS",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "tests/test_graphify_integration.py",
+        "source_location": "L1",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "tests_test_graphify_integration_rationale_25",
+      "label": "Verify knowledge_graph.json exists and contains correct schema.",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "tests/test_graphify_integration.py",
+        "source_location": "L25",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "tests_test_graphify_integration_rationale_45",
+      "label": "Verify DOT and Mermaid diagrams are generated.",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "tests/test_graphify_integration.py",
+        "source_location": "L45",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "tests_test_graphify_integration_rationale_59",
+      "label": "Verify overview query returns complete topology.",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "tests/test_graphify_integration.py",
+        "source_location": "L59",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "tests_test_graphify_integration_rationale_68",
+      "label": "Verify dependency query on main.py returns connections.",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "tests/test_graphify_integration.py",
+        "source_location": "L68",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "tests_test_graphify_integration_rationale_76",
+      "label": "Verify blast radius impact analysis computes risk level.",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "tests/test_graphify_integration.py",
+        "source_location": "L76",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "tests_test_graphify_integration_rationale_84",
+      "label": "Verify task mapping can find code nodes related to tasks.",
+      "type": "python_symbol",
+      "metadata": {
+        "source_file": "tests/test_graphify_integration.py",
+        "source_location": "L84",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "go_type_github_com_gorilla_websocket_conn",
+      "label": "github.com/gorilla/websocket.Conn",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "",
+        "source_location": "",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "go_type_sync_rwmutex",
+      "label": "sync.RWMutex",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "",
+        "source_location": "",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "go_type_net_http_responsewriter",
+      "label": "net/http.ResponseWriter",
+      "type": "ast_symbol",
+      "metadata": {
+        "source_file": "",
+        "source_location": "",
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "id": "goal:system",
+      "label": "System Goal (Vibe OS)",
+      "type": "goal",
+      "metadata": {
+        "path": "control-state/GOAL.md"
+      }
+    },
+    {
+      "id": "capability:real-time_log_streaming",
+      "label": "Capability: Real-time Log Streaming",
+      "type": "capability",
+      "metadata": {
+        "description": "Low-latency WebSocket broadcasting from agent execution loops to browser UI."
+      }
+    },
+    {
+      "id": "capability:state_machine_governance",
+      "label": "Capability: State Machine Governance",
+      "type": "capability",
+      "metadata": {
+        "description": "Clear distinction between Agile execution iterations and Waterfall approval gates."
+      }
+    },
+    {
+      "id": "capability:markdown-driven_source_of_truth",
+      "label": "Capability: Markdown-driven Source of Truth",
+      "type": "capability",
+      "metadata": {
+        "description": "All goals, tasks, handoff summaries, and human decisions are persisted in human-readable Markdown files."
+      }
+    },
+    {
+      "id": "task:TASK-001",
+      "label": "Task [TASK-001]: Initialize Go WebSocket Gateway & broadcasting routing",
+      "type": "task",
+      "metadata": {
+        "status": "DONE",
+        "priority": "HIGH",
+        "description": "Initialize Go WebSocket Gateway & broadcasting routing"
+      }
+    },
+    {
+      "id": "task:TASK-002",
+      "label": "Task [TASK-002]: Build FastAPI mock agent execution loop & status hook",
+      "type": "task",
+      "metadata": {
+        "status": "IN_PROGRESS",
+        "priority": "HIGH",
+        "description": "Build FastAPI mock agent execution loop & status hook"
+      }
+    },
+    {
+      "id": "task:TASK-003",
+      "label": "Task [TASK-003]: Construct Cyberpunk Dark Mode Frontend Control Panel",
+      "type": "task",
+      "metadata": {
+        "status": "IN_PROGRESS",
+        "priority": "HIGH",
+        "description": "Construct Cyberpunk Dark Mode Frontend Control Panel"
+      }
+    },
+    {
+      "id": "task:TASK-004",
+      "label": "Task [TASK-004]: Integrate Waterfall Human Approval Gate & Handoff logging",
+      "type": "task",
+      "metadata": {
+        "status": "TODO",
+        "priority": "MEDIUM",
+        "description": "Integrate Waterfall Human Approval Gate & Handoff logging"
+      }
+    },
+    {
+      "id": "state:system",
+      "label": "System State Machine",
+      "type": "state",
+      "metadata": {
+        "path": "control-state/STATE.md"
+      }
+    },
+    {
+      "id": "service:agent-python",
+      "label": "Service: Python Agent (FastAPI)",
+      "type": "service",
+      "metadata": {
+        "tech": "Python / FastAPI"
+      }
+    },
+    {
+      "id": "service:backend-go",
+      "label": "Service: Go WebSocket Gateway",
+      "type": "service",
+      "metadata": {
+        "tech": "Go / Gorilla WebSocket"
+      }
+    },
+    {
+      "id": "service:frontend",
+      "label": "Service: Frontend Dashboard",
+      "type": "service",
+      "metadata": {
+        "tech": "HTML5 / Tailwind CSS / Vanilla JS"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "readme_setup",
+      "target": "readme_setup_vibe_os_visualized_agile_waterfall_hybrid_development_system",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "readme_setup_vibe_os_visualized_agile_waterfall_hybrid_development_system",
+      "target": "readme_setup_directory_overview",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "readme_setup_vibe_os_visualized_agile_waterfall_hybrid_development_system",
+      "target": "readme_setup_quick_start_guide",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "readme_setup_quick_start_guide",
+      "target": "readme_setup_step_1_start_the_go_websocket_gateway_backend_go",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "readme_setup_quick_start_guide",
+      "target": "readme_setup_step_2_start_the_python_agent_backend_agent_python",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "readme_setup_quick_start_guide",
+      "target": "readme_setup_step_3_launch_the_frontend_control_dashboard_frontend",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "readme_setup_vibe_os_visualized_agile_waterfall_hybrid_development_system",
+      "target": "readme_setup_interactive_workflow_verification",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "readme_setup_vibe_os_visualized_agile_waterfall_hybrid_development_system",
+      "target": "readme_setup_security_environment_integrity",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_graph_service",
+      "target": "json",
+      "relation": "imports",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_graph_service",
+      "target": "os",
+      "relation": "imports",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_graph_service",
+      "target": "subprocess",
+      "relation": "imports",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_graph_service",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_graph_service",
+      "target": "typing",
+      "relation": "imports_from",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_graph_service",
+      "target": "agent_python_graph_service_ensure_graph_exists",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_graph_service_ensure_graph_exists",
+      "target": "agent_python_graph_service_py_any",
+      "relation": "references",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_graph_service",
+      "target": "agent_python_graph_service_find_matching_nodes",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_graph_service_find_matching_nodes",
+      "target": "agent_python_graph_service_py_any",
+      "relation": "references",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_graph_service",
+      "target": "agent_python_graph_service_query_code_graph",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_graph_service_query_code_graph",
+      "target": "agent_python_graph_service_py_any",
+      "relation": "references",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_graph_service_query_code_graph",
+      "target": "agent_python_graph_service_ensure_graph_exists",
+      "relation": "calls",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_graph_service_query_code_graph",
+      "target": "agent_python_graph_service_find_matching_nodes",
+      "relation": "calls",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_graph_service_rationale_1",
+      "target": "agent_python_graph_service",
+      "relation": "rationale_for",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_graph_service_rationale_22",
+      "target": "agent_python_graph_service_ensure_graph_exists",
+      "relation": "rationale_for",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_graph_service_rationale_38",
+      "target": "agent_python_graph_service_find_matching_nodes",
+      "relation": "rationale_for",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_graph_service_rationale_50",
+      "target": "agent_python_graph_service_query_code_graph",
+      "relation": "rationale_for",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main",
+      "target": "asyncio",
+      "relation": "imports",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main",
+      "target": "datetime",
+      "relation": "imports_from",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main",
+      "target": "json",
+      "relation": "imports",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main",
+      "target": "os",
+      "relation": "imports",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main",
+      "target": "typing",
+      "relation": "imports_from",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main",
+      "target": "fastapi",
+      "relation": "imports_from",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main",
+      "target": "fastapi_middleware_cors",
+      "relation": "imports_from",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main",
+      "target": "pydantic",
+      "relation": "imports_from",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main",
+      "target": "requests",
+      "relation": "imports",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main",
+      "target": "agent_python_graph_service",
+      "relation": "imports_from",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main",
+      "target": "agent_python_main_taskstartrequest",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_taskstartrequest",
+      "target": "basemodel",
+      "relation": "inherits",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main",
+      "target": "agent_python_main_approvalrequest",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_approvalrequest",
+      "target": "basemodel",
+      "relation": "inherits",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main",
+      "target": "agent_python_main_graphqueryrequest",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_graphqueryrequest",
+      "target": "basemodel",
+      "relation": "inherits",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main",
+      "target": "agent_python_main_agenttracerequest",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_agenttracerequest",
+      "target": "basemodel",
+      "relation": "inherits",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main",
+      "target": "agent_python_main_mcpcallrequest",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_mcpcallrequest",
+      "target": "basemodel",
+      "relation": "inherits",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main",
+      "target": "agent_python_main_broadcast_agent_status",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main",
+      "target": "agent_python_main_broadcast_agent_trace",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_broadcast_agent_trace",
+      "target": "agent_python_main_py_any",
+      "relation": "references",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main",
+      "target": "agent_python_main_update_file_content",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_update_file_content",
+      "target": "agent_python_main_py_path",
+      "relation": "references",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main",
+      "target": "agent_python_main_mock_agent_execution_loop",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_read_root",
+      "target": "get",
+      "relation": "references",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main",
+      "target": "agent_python_main_read_root",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_get_current_state",
+      "target": "get",
+      "relation": "references",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main",
+      "target": "agent_python_main_get_current_state",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_start_task",
+      "target": "post",
+      "relation": "references",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main",
+      "target": "agent_python_main_start_task",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_start_task",
+      "target": "agent_python_main_taskstartrequest",
+      "relation": "references",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_start_task",
+      "target": "backgroundtasks",
+      "relation": "references",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_approve_waterfall_gate",
+      "target": "post",
+      "relation": "references",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main",
+      "target": "agent_python_main_approve_waterfall_gate",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_approve_waterfall_gate",
+      "target": "agent_python_main_approvalrequest",
+      "relation": "references",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_graph_query",
+      "target": "post",
+      "relation": "references",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main",
+      "target": "agent_python_main_graph_query",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_graph_query",
+      "target": "agent_python_main_graphqueryrequest",
+      "relation": "references",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_forward_agent_trace",
+      "target": "post",
+      "relation": "references",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main",
+      "target": "agent_python_main_forward_agent_trace",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_forward_agent_trace",
+      "target": "agent_python_main_agenttracerequest",
+      "relation": "references",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_get_mcp_tools",
+      "target": "get",
+      "relation": "references",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main",
+      "target": "agent_python_main_get_mcp_tools",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_call_mcp_tool",
+      "target": "post",
+      "relation": "references",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main",
+      "target": "agent_python_main_call_mcp_tool",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_call_mcp_tool",
+      "target": "agent_python_main_mcpcallrequest",
+      "relation": "references",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main",
+      "target": "uvicorn",
+      "relation": "imports",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_broadcast_agent_trace",
+      "target": "agent_python_main_broadcast_agent_status",
+      "relation": "calls",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_mock_agent_execution_loop",
+      "target": "agent_python_main_broadcast_agent_status",
+      "relation": "calls",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_mock_agent_execution_loop",
+      "target": "agent_python_main_broadcast_agent_trace",
+      "relation": "calls",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_mock_agent_execution_loop",
+      "target": "agent_python_main_update_file_content",
+      "relation": "calls",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_start_task",
+      "target": "agent_python_main_mock_agent_execution_loop",
+      "relation": "indirect_call",
+      "metadata": {
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "source": "agent_python_main_start_task",
+      "target": "agent_python_main_update_file_content",
+      "relation": "calls",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_approve_waterfall_gate",
+      "target": "agent_python_main_broadcast_agent_status",
+      "relation": "calls",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_approve_waterfall_gate",
+      "target": "agent_python_main_update_file_content",
+      "relation": "calls",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_forward_agent_trace",
+      "target": "agent_python_main_broadcast_agent_trace",
+      "relation": "calls",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_rationale_71",
+      "target": "agent_python_main_broadcast_agent_status",
+      "relation": "rationale_for",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_rationale_86",
+      "target": "agent_python_main_broadcast_agent_trace",
+      "relation": "rationale_for",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_rationale_92",
+      "target": "agent_python_main_update_file_content",
+      "relation": "rationale_for",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_rationale_100",
+      "target": "agent_python_main_mock_agent_execution_loop",
+      "relation": "rationale_for",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_rationale_193",
+      "target": "agent_python_main_get_current_state",
+      "relation": "rationale_for",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_rationale_209",
+      "target": "agent_python_main_start_task",
+      "relation": "rationale_for",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_rationale_236",
+      "target": "agent_python_main_approve_waterfall_gate",
+      "relation": "rationale_for",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_rationale_276",
+      "target": "agent_python_main_graph_query",
+      "relation": "rationale_for",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_rationale_283",
+      "target": "agent_python_main_forward_agent_trace",
+      "relation": "rationale_for",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_rationale_295",
+      "target": "agent_python_main_get_mcp_tools",
+      "relation": "rationale_for",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_rationale_323",
+      "target": "agent_python_main_call_mcp_tool",
+      "relation": "rationale_for",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "backend_go_main",
+      "target": "go_pkg_encoding_json",
+      "relation": "imports_from",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "backend_go_main",
+      "target": "go_pkg_fmt",
+      "relation": "imports_from",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "backend_go_main",
+      "target": "go_pkg_io",
+      "relation": "imports_from",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "backend_go_main",
+      "target": "go_pkg_log",
+      "relation": "imports_from",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "backend_go_main",
+      "target": "go_pkg_net_http",
+      "relation": "imports_from",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "backend_go_main",
+      "target": "go_pkg_sync",
+      "relation": "imports_from",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "backend_go_main",
+      "target": "go_pkg_time",
+      "relation": "imports_from",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "backend_go_main",
+      "target": "go_pkg_github_com_gorilla_websocket",
+      "relation": "imports_from",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "backend_go_main",
+      "target": "backend_go_agentstatuspayload",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "backend_go_main",
+      "target": "backend_go_hub",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "backend_go_hub",
+      "target": "go_type_github_com_gorilla_websocket_conn",
+      "relation": "references",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "backend_go_hub",
+      "target": "backend_go_agentstatuspayload",
+      "relation": "references",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "backend_go_hub",
+      "target": "go_type_sync_rwmutex",
+      "relation": "references",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "backend_go_main",
+      "target": "backend_go_main_newhub",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "backend_go_main_newhub",
+      "target": "backend_go_hub",
+      "relation": "references",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "backend_go_hub",
+      "target": "backend_go_hub_run",
+      "relation": "method",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "backend_go_main",
+      "target": "backend_go_main_enablecors",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "backend_go_main_enablecors",
+      "target": "go_type_net_http_responsewriter",
+      "relation": "references",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "backend_go_main",
+      "target": "backend_go_main_main",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "backend_go_main_main",
+      "target": "backend_go_main_newhub",
+      "relation": "calls",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "backend_go_main_main",
+      "target": "backend_go_hub_run",
+      "relation": "calls",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "backend_go_main_main",
+      "target": "backend_go_main_enablecors",
+      "relation": "calls",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "control_state_decisions",
+      "target": "control_state_decisions_human_waterfall_decisions_log",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "control_state_decisions_human_waterfall_decisions_log",
+      "target": "control_state_decisions_initial_log",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "control_state_decisions_human_waterfall_decisions_log",
+      "target": "control_state_decisions_decision_record_2026_09_21t05_15_00_893509z",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "control_state_goal",
+      "target": "control_state_goal_system_goal_vibe_coding_hybrid_agile_waterfall_development_os_vibe_os",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "control_state_goal_system_goal_vibe_coding_hybrid_agile_waterfall_development_os_vibe_os",
+      "target": "control_state_goal_objective",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "control_state_goal_system_goal_vibe_coding_hybrid_agile_waterfall_development_os_vibe_os",
+      "target": "control_state_goal_core_capabilities",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "control_state_handoff",
+      "target": "control_state_handoff_agent_handoff_log",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "control_state_handoff_agent_handoff_log",
+      "target": "control_state_handoff_initial_handoff_template",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "control_state_handoff_agent_handoff_log",
+      "target": "control_state_handoff_handoff_record_2026_09_21t05_14_21_292282z",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "control_state_handoff_agent_handoff_log",
+      "target": "control_state_handoff_handoff_record_2026_09_21t11_42_29_295052z",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "control_state_state",
+      "target": "control_state_state_current_system_state",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "control_state_tasks",
+      "target": "control_state_tasks_agile_backlog_tasks",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "control_state_tasks_agile_backlog_tasks",
+      "target": "control_state_tasks_sprint_1",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "reports_graphify_integration_report",
+      "target": "reports_graphify_integration_report_graphify_本地知識圖譜整合與_aiops_自癒工作流架構報告",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "reports_graphify_integration_report_graphify_本地知識圖譜整合與_aiops_自癒工作流架構報告",
+      "target": "reports_graphify_integration_report_執行摘要_executive_summary",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "reports_graphify_integration_report_graphify_本地知識圖譜整合與_aiops_自癒工作流架構報告",
+      "target": "reports_graphify_integration_report_交付成果清單_deliverables",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "reports_graphify_integration_report_交付成果清單_deliverables",
+      "target": "reports_graphify_integration_report_1_graphify_初始化腳本與掃描引擎",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "reports_graphify_integration_report_交付成果清單_deliverables",
+      "target": "reports_graphify_integration_report_2_python_agent_擴充與_mcp_知識查詢邏輯",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "reports_graphify_integration_report_交付成果清單_deliverables",
+      "target": "reports_graphify_integration_report_3_ci_cd_自癒流程與安全審批門禁",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "reports_graphify_integration_report_graphify_本地知識圖譜整合與_aiops_自癒工作流架構報告",
+      "target": "reports_graphify_integration_report_資安與治理規則合規說明_security_governance_compliance",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "reports_graphify_integration_report_graphify_本地知識圖譜整合與_aiops_自癒工作流架構報告",
+      "target": "reports_graphify_integration_report_測試與驗證數據_verification_test_results",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "reports_graphify_integration_report_測試與驗證數據_verification_test_results",
+      "target": "reports_graphify_integration_report_1_單元與整合測試",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "reports_graphify_integration_report_測試與驗證數據_verification_test_results",
+      "target": "reports_graphify_integration_report_2_後端編譯驗證",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "reports_graphify_integration_report_graphify_本地知識圖譜整合與_aiops_自癒工作流架構報告",
+      "target": "reports_graphify_integration_report_後續步驟",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine",
+      "target": "ast",
+      "relation": "imports",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine",
+      "target": "json",
+      "relation": "imports",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine",
+      "target": "os",
+      "relation": "imports",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine",
+      "target": "re",
+      "relation": "imports",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine",
+      "target": "sys",
+      "relation": "imports",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine",
+      "target": "typing",
+      "relation": "imports_from",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine",
+      "target": "networkx",
+      "relation": "imports",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine",
+      "target": "graphify_extract",
+      "relation": "imports_from",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine",
+      "target": "graphify_build",
+      "relation": "imports_from",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine",
+      "target": "graphify_cluster",
+      "relation": "imports_from",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine",
+      "target": "graphify_analyze",
+      "relation": "imports_from",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine",
+      "target": "graphify_export",
+      "relation": "imports_from",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine",
+      "target": "graphify_report",
+      "relation": "imports_from",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine",
+      "target": "graphify_callflow_html",
+      "relation": "imports_from",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine",
+      "target": "scripts_graphify_engine_upgradedvibegraphifyengine",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine_upgradedvibegraphifyengine",
+      "target": "scripts_graphify_engine_upgradedvibegraphifyengine_init",
+      "relation": "method",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine_upgradedvibegraphifyengine_init",
+      "target": "scripts_graphify_engine_py_path",
+      "relation": "references",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine_upgradedvibegraphifyengine",
+      "target": "scripts_graphify_engine_upgradedvibegraphifyengine_add_node",
+      "relation": "method",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine_upgradedvibegraphifyengine_add_node",
+      "target": "scripts_graphify_engine_py_any",
+      "relation": "references",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine_upgradedvibegraphifyengine",
+      "target": "scripts_graphify_engine_upgradedvibegraphifyengine_add_edge",
+      "relation": "method",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine_upgradedvibegraphifyengine_add_edge",
+      "target": "scripts_graphify_engine_py_any",
+      "relation": "references",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine_upgradedvibegraphifyengine",
+      "target": "scripts_graphify_engine_upgradedvibegraphifyengine_scan_codebase_ast",
+      "relation": "method",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine_upgradedvibegraphifyengine",
+      "target": "scripts_graphify_engine_upgradedvibegraphifyengine_scan_markdown_specifications",
+      "relation": "method",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine_upgradedvibegraphifyengine",
+      "target": "scripts_graphify_engine_upgradedvibegraphifyengine_link_services_and_tasks",
+      "relation": "method",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine_upgradedvibegraphifyengine",
+      "target": "scripts_graphify_engine_upgradedvibegraphifyengine_build_networkx_graph",
+      "relation": "method",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine_upgradedvibegraphifyengine_build_networkx_graph",
+      "target": "scripts_graphify_engine_py_any",
+      "relation": "references",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine_upgradedvibegraphifyengine",
+      "target": "scripts_graphify_engine_upgradedvibegraphifyengine_export",
+      "relation": "method",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine",
+      "target": "scripts_graphify_engine_main",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine_upgradedvibegraphifyengine_scan_codebase_ast",
+      "target": "scripts_graphify_engine_upgradedvibegraphifyengine_add_node",
+      "relation": "calls",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine_upgradedvibegraphifyengine_scan_codebase_ast",
+      "target": "scripts_graphify_engine_upgradedvibegraphifyengine_add_edge",
+      "relation": "calls",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine_upgradedvibegraphifyengine_scan_markdown_specifications",
+      "target": "scripts_graphify_engine_upgradedvibegraphifyengine_add_node",
+      "relation": "calls",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine_upgradedvibegraphifyengine_scan_markdown_specifications",
+      "target": "scripts_graphify_engine_upgradedvibegraphifyengine_add_edge",
+      "relation": "calls",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine_upgradedvibegraphifyengine_link_services_and_tasks",
+      "target": "scripts_graphify_engine_upgradedvibegraphifyengine_add_node",
+      "relation": "calls",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine_upgradedvibegraphifyengine_link_services_and_tasks",
+      "target": "scripts_graphify_engine_upgradedvibegraphifyengine_add_edge",
+      "relation": "calls",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine_upgradedvibegraphifyengine_export",
+      "target": "scripts_graphify_engine_upgradedvibegraphifyengine_build_networkx_graph",
+      "relation": "calls",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine_main",
+      "target": "scripts_graphify_engine_upgradedvibegraphifyengine",
+      "relation": "calls",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine_rationale_2",
+      "target": "scripts_graphify_engine",
+      "relation": "rationale_for",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine_rationale_82",
+      "target": "scripts_graphify_engine_upgradedvibegraphifyengine_scan_codebase_ast",
+      "relation": "rationale_for",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine_rationale_135",
+      "target": "scripts_graphify_engine_upgradedvibegraphifyengine_scan_markdown_specifications",
+      "relation": "rationale_for",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine_rationale_180",
+      "target": "scripts_graphify_engine_upgradedvibegraphifyengine_link_services_and_tasks",
+      "relation": "rationale_for",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine_rationale_209",
+      "target": "scripts_graphify_engine_upgradedvibegraphifyengine_build_networkx_graph",
+      "relation": "rationale_for",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_graphify_engine_rationale_218",
+      "target": "scripts_graphify_engine_upgradedvibegraphifyengine_export",
+      "relation": "rationale_for",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "scripts_init_graphify",
+      "target": "scripts_init_graphify_sh__entry",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "start",
+      "target": "start_sh__entry",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "start",
+      "target": "start_cleanup",
+      "relation": "defines",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_e2e_telemetry_test",
+      "target": "os",
+      "relation": "imports",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_e2e_telemetry_test",
+      "target": "re",
+      "relation": "imports",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_e2e_telemetry_test",
+      "target": "unittest",
+      "relation": "imports",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_e2e_telemetry_test",
+      "target": "tests_e2e_telemetry_test_testvibeoscontrolstate",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_e2e_telemetry_test_testvibeoscontrolstate",
+      "target": "tests_e2e_telemetry_test_testvibeoscontrolstate_setup",
+      "relation": "method",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_e2e_telemetry_test_testvibeoscontrolstate",
+      "target": "tests_e2e_telemetry_test_testvibeoscontrolstate_test_state_file_exists",
+      "relation": "method",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_e2e_telemetry_test_testvibeoscontrolstate",
+      "target": "tests_e2e_telemetry_test_testvibeoscontrolstate_test_gate_transition_validity",
+      "relation": "method",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_e2e_telemetry_test_testvibeoscontrolstate",
+      "target": "tests_e2e_telemetry_test_testvibeoscontrolstate_test_handoff_log_integrity",
+      "relation": "method",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_e2e_telemetry_test_rationale_1",
+      "target": "tests_e2e_telemetry_test",
+      "relation": "rationale_for",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_e2e_telemetry_test_rationale_17",
+      "target": "tests_e2e_telemetry_test_testvibeoscontrolstate_test_state_file_exists",
+      "relation": "rationale_for",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_e2e_telemetry_test_rationale_26",
+      "target": "tests_e2e_telemetry_test_testvibeoscontrolstate_test_gate_transition_validity",
+      "relation": "rationale_for",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_e2e_telemetry_test_rationale_36",
+      "target": "tests_e2e_telemetry_test_testvibeoscontrolstate_test_handoff_log_integrity",
+      "relation": "rationale_for",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_test_graphify_integration",
+      "target": "json",
+      "relation": "imports",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_test_graphify_integration",
+      "target": "os",
+      "relation": "imports",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_test_graphify_integration",
+      "target": "sys",
+      "relation": "imports",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_test_graphify_integration",
+      "target": "unittest",
+      "relation": "imports",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_test_graphify_integration",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_test_graphify_integration",
+      "target": "graph_service",
+      "relation": "imports_from",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_test_graphify_integration",
+      "target": "tests_test_graphify_integration_testgraphifyintegration",
+      "relation": "contains",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_test_graphify_integration_testgraphifyintegration",
+      "target": "tests_test_graphify_integration_testgraphifyintegration_setupclass",
+      "relation": "method",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_test_graphify_integration_testgraphifyintegration",
+      "target": "tests_test_graphify_integration_testgraphifyintegration_test_knowledge_graph_json_structure",
+      "relation": "method",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_test_graphify_integration_testgraphifyintegration",
+      "target": "tests_test_graphify_integration_testgraphifyintegration_test_dot_and_mermaid_artifacts",
+      "relation": "method",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_test_graphify_integration_testgraphifyintegration",
+      "target": "tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_overview",
+      "relation": "method",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_test_graphify_integration_testgraphifyintegration",
+      "target": "tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_dependencies",
+      "relation": "method",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_test_graphify_integration_testgraphifyintegration",
+      "target": "tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_impact_analysis",
+      "relation": "method",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_test_graphify_integration_testgraphifyintegration",
+      "target": "tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_task_mapping",
+      "relation": "method",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_test_graphify_integration_rationale_1",
+      "target": "tests_test_graphify_integration",
+      "relation": "rationale_for",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_test_graphify_integration_rationale_25",
+      "target": "tests_test_graphify_integration_testgraphifyintegration_test_knowledge_graph_json_structure",
+      "relation": "rationale_for",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_test_graphify_integration_rationale_45",
+      "target": "tests_test_graphify_integration_testgraphifyintegration_test_dot_and_mermaid_artifacts",
+      "relation": "rationale_for",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_test_graphify_integration_rationale_59",
+      "target": "tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_overview",
+      "relation": "rationale_for",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_test_graphify_integration_rationale_68",
+      "target": "tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_dependencies",
+      "relation": "rationale_for",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_test_graphify_integration_rationale_76",
+      "target": "tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_impact_analysis",
+      "relation": "rationale_for",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_test_graphify_integration_rationale_84",
+      "target": "tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_task_mapping",
+      "relation": "rationale_for",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main",
+      "target": "agent_python_graph_service_query_code_graph",
+      "relation": "imports",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_mock_agent_execution_loop",
+      "target": "agent_python_graph_service_query_code_graph",
+      "relation": "calls",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_graph_query",
+      "target": "agent_python_graph_service_query_code_graph",
+      "relation": "calls",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "agent_python_main_call_mcp_tool",
+      "target": "agent_python_graph_service_query_code_graph",
+      "relation": "calls",
+      "metadata": {
+        "confidence": "EXTRACTED"
+      }
+    },
+    {
+      "source": "tests_test_graphify_integration_testgraphifyintegration_setupclass",
+      "target": "agent_python_graph_service_ensure_graph_exists",
+      "relation": "calls",
+      "metadata": {
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "source": "tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_overview",
+      "target": "agent_python_graph_service_query_code_graph",
+      "relation": "calls",
+      "metadata": {
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "source": "tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_dependencies",
+      "target": "agent_python_graph_service_query_code_graph",
+      "relation": "calls",
+      "metadata": {
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "source": "tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_impact_analysis",
+      "target": "agent_python_graph_service_query_code_graph",
+      "relation": "calls",
+      "metadata": {
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "source": "tests_test_graphify_integration_testgraphifyintegration_test_query_code_graph_task_mapping",
+      "target": "agent_python_graph_service_query_code_graph",
+      "relation": "calls",
+      "metadata": {
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "source": "reports_graphify_integration_report_2_python_agent_擴充與_mcp_知識查詢邏輯",
+      "target": "agent_python_graph_service_query_code_graph",
+      "relation": "references",
+      "metadata": {
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "source": "reports_graphify_integration_report_2_python_agent_擴充與_mcp_知識查詢邏輯",
+      "target": "agent_python_main_mock_agent_execution_loop",
+      "relation": "references",
+      "metadata": {
+        "confidence": "INFERRED"
+      }
+    },
+    {
+      "source": "goal:system",
+      "target": "capability:real-time_log_streaming",
+      "relation": "fulfills",
+      "metadata": {}
+    },
+    {
+      "source": "goal:system",
+      "target": "capability:state_machine_governance",
+      "relation": "fulfills",
+      "metadata": {}
+    },
+    {
+      "source": "goal:system",
+      "target": "capability:markdown-driven_source_of_truth",
+      "relation": "fulfills",
+      "metadata": {}
+    },
+    {
+      "source": "goal:system",
+      "target": "task:TASK-001",
+      "relation": "tracks",
+      "metadata": {}
+    },
+    {
+      "source": "goal:system",
+      "target": "task:TASK-002",
+      "relation": "tracks",
+      "metadata": {}
+    },
+    {
+      "source": "goal:system",
+      "target": "task:TASK-003",
+      "relation": "tracks",
+      "metadata": {}
+    },
+    {
+      "source": "goal:system",
+      "target": "task:TASK-004",
+      "relation": "tracks",
+      "metadata": {}
+    },
+    {
+      "source": "task:TASK-001",
+      "target": "service:backend-go",
+      "relation": "implemented_by",
+      "metadata": {}
+    },
+    {
+      "source": "task:TASK-002",
+      "target": "service:agent-python",
+      "relation": "implemented_by",
+      "metadata": {}
+    },
+    {
+      "source": "task:TASK-003",
+      "target": "service:frontend",
+      "relation": "implemented_by",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_graph_service",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_graph_service_ensure_graph_exists",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_graph_service_find_matching_nodes",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_graph_service_query_code_graph",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_graph_service_rationale_1",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_graph_service_rationale_22",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_graph_service_rationale_38",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_graph_service_rationale_50",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_main",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_main_taskstartrequest",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_main_approvalrequest",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_main_graphqueryrequest",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_main_agenttracerequest",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_main_mcpcallrequest",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_main_broadcast_agent_status",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_main_broadcast_agent_trace",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_main_update_file_content",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_main_mock_agent_execution_loop",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_main_read_root",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_main_get_current_state",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_main_start_task",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_main_approve_waterfall_gate",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_main_graph_query",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_main_forward_agent_trace",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_main_get_mcp_tools",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_main_call_mcp_tool",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_main_rationale_71",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_main_rationale_86",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_main_rationale_92",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_main_rationale_100",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_main_rationale_193",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_main_rationale_209",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_main_rationale_236",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_main_rationale_276",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_main_rationale_283",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_main_rationale_295",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:agent-python",
+      "target": "agent_python_main_rationale_323",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:backend-go",
+      "target": "backend_go_main",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:backend-go",
+      "target": "backend_go_agentstatuspayload",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:backend-go",
+      "target": "backend_go_hub",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:backend-go",
+      "target": "backend_go_main_newhub",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:backend-go",
+      "target": "backend_go_hub_run",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:backend-go",
+      "target": "backend_go_main_enablecors",
+      "relation": "contains",
+      "metadata": {}
+    },
+    {
+      "source": "service:backend-go",
+      "target": "backend_go_main_main",
+      "relation": "contains",
+      "metadata": {}
+    }
+  ]
+}
